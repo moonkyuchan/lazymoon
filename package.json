@@ -9,8 +9,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
-    "sass-variable-parser": "^1.2.2",
     "styled-components": "^5.3.9",
+    "styled-reset": "^4.4.5",
     "typescript": "^4.9.5",
     "ua-parser-js": "^1.0.34",
     "web-vitals": "^2.1.4"
@@ -50,6 +50,8 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "@types/ua-parser-js": "^0.7.36",
+    "sass-variable-parser": "^1.2.2",
+    "style-loader": "^3.3.2",
     "ts-node": "^10.9.1"
   }
 }

@@ -3,6 +3,11 @@
   "extends": "./tsconfig.path.json",
   "compilerOptions": {
     "target": "esnext",
+    "typeRoots": [
+      "src/Types/",
+      "node_modules/@types/",
+      "**/node_modules/@types/"
+    ],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": false,
