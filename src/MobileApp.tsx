@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Header from "@/Layout/Header";
-import { createGlobalStyle } from "styled-components";
+import Dashboard from "@/Components/Dashboard";
 
 // const BodyStyles = createGlobalStyle`
 // 	body {
@@ -21,14 +21,19 @@ import { createGlobalStyle } from "styled-components";
 
 export default function MobileApp() {
   return (
-    <>
-      {/* <BodyStyles /> */}
+    <StyledLayout>
       <Header />
-      <StyledContent>사진</StyledContent>
-    </>
+      <Dashboard />
+    </StyledLayout>
   );
 }
 
-const StyledContent = styled.div(({ theme }) => {
-  return {};
+const StyledLayout = styled.section(({ theme }) => {
+  return {
+    position: "relative",
+    minWidth: "360px",
+    display: "flex",
+    flexDirection: "column",
+    height: "1000px",
+  };
 });

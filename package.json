@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "prestart": "node ./generate.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -53,6 +54,7 @@
     "@types/ua-parser-js": "^0.7.36",
     "sass-variable-parser": "^1.2.2",
     "style-loader": "^3.3.2",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript-interface-generator": "0.0.6"
   }
 }
