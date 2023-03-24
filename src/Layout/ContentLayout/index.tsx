@@ -15,8 +15,6 @@ const StyledLayout = styled.section(({ theme }) => {
   return {
     display: "flex",
     flexDirection: "column",
-    height: "calc(100vh - 50px)",
-    padding: "5px 0",
-    backgroundColor: "blue",
+    // padding: "5px 0",
   };
 });

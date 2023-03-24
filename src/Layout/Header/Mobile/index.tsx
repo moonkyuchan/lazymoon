@@ -7,11 +7,13 @@ export default function MobileHeader(): ReactElement {
     <StyledHeader>
       <StyledRow>
         <StyledLeft>
-          <StyledMenu onClick={() => console.log("CLICK")} />
-          <StyledTitle>LAZYMOON</StyledTitle>
+          <StyledMenu onClick={() => console.log("MENU")} />
+          <StyledTitle onClick={() => console.log("HOME")}>
+            LAZYMOON
+          </StyledTitle>
         </StyledLeft>
         <StyledRight>
-          <StyledSearch />
+          <StyledSearch onClick={() => console.log("SEARCH")} />
         </StyledRight>
       </StyledRow>
     </StyledHeader>
@@ -20,7 +22,7 @@ export default function MobileHeader(): ReactElement {
 
 const StyledHeader = styled.header(({ theme }) => {
   return {
-    position: "sticky",
+    position: "fixed",
     top: 0,
     width: "100%",
     padding: "0 20px",
@@ -59,11 +61,11 @@ const StyledMenu = styled(MenuOutlined)(() => {
 
 const StyledTitle = styled.span(() => {
   return {
-    marginLeft: "5px",
+    paddingLeft: "5px",
     letterSpacing: "1.3px",
   };
 });
 
 const StyledSearch = styled(SearchOutlined)(() => {
-  return {};
+  return { padding: "0 2px" };
 });
