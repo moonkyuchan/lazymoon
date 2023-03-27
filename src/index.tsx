@@ -4,9 +4,8 @@ import DeviceContext, { DeviceProvider } from "@/Context/DeviceContext";
 
 import { ThemeProvider } from "styled-components";
 import ResetStyles from "@root/src/Styles/reset";
-// import theme from "@/Styles/variables";
 
-import theme from "!!sass-variable-parser!./Styles/vari.scss";
+import theme from "!!sass-variable-parser!./Styles/variables.scss";
 
 import App from "@/App";
 import MobileApp from "./MobileApp";

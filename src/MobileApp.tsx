@@ -4,6 +4,9 @@ import Dashboard from "@/Components/Dashboard";
 import { createGlobalStyle } from "styled-components";
 
 const BodyStyles = createGlobalStyle`
+  html {
+    overflow: hidden;
+  }
 	body {
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -32,7 +35,7 @@ export default function MobileApp() {
   );
 }
 
-const StyledLayout = styled.section(({ theme }) => {
+const StyledLayout = styled.section(() => {
   return {
     position: "relative",
     minWidth: "360px",

@@ -11,10 +11,7 @@ export default function ContentLayout(props: ICenterLayoutProps): ReactElement {
   return <StyledLayout>{children}</StyledLayout>;
 }
 
-const StyledLayout = styled.section(({ theme }) => {
-  return {
-    display: "flex",
-    flexDirection: "column",
-    // padding: "5px 0",
-  };
-});
+const StyledLayout = styled.section`
+  display: "flex";
+  flex-direction: "column";
+`;

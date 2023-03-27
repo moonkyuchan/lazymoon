@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState, useEffect, useCallback } from "react";
 import ContentLayout from "@root/src/Layout/ContentLayout";
 import styeld from "styled-components";
 import tower from "@/Asset/Images/french.jpeg";
@@ -6,6 +6,31 @@ import bridge from "@/Asset/Images/bridge.jpeg";
 import home from "@/Asset/Images/home.jpeg";
 
 export default function Dashboard(): ReactElement {
+  // const [y, setY] = useState<any>(document?.scrollingElement?.scrollHeight);
+  // const [scrollDirection, setScrollDirection] = useState(
+  //   "you have not scrolled yet"
+  // );
+
+  // const handleNavigation = useCallback(
+  //   (e) => {
+  //     if (y > window.scrollY) {
+  //       setScrollDirection("Scrolling Up");
+  //     } else if (y < window.scrollY) {
+  //       setScrollDirection("Scrolling Down");
+  //     }
+  //     setY(window.scrollY);
+  //   },
+  //   [y]
+  // );
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleNavigation);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleNavigation);
+  //   };
+  // }, [handleNavigation]);
+
   return (
     <ContentLayout>
       <StyledItems2>
@@ -36,7 +61,7 @@ const StyledItems = styeld.section(() => {
   };
 });
 
-const StyledItems2 = styeld.section(({ theme }) => {
+const StyledItems2 = styeld.section(() => {
   return {
     width: "auto",
     height: "calc(100vh - 50px)",
