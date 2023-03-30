@@ -22,12 +22,20 @@ export default function Dashboard(): ReactElement {
     };
   });
 
-    const onMoveToElement = () => {
-     return element.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  function useMoveScrool() {
+    const refObject = {
+      bridge: useRef(null),
+      tower: useRef(null),
+      home: useRef(null),
     };
-    
+    const onMoveToElement = () => {
+      Object.keys(refObject)
+        .filter((d) => d === refObject[d])
+        .current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    return { refObject, onMoveToElement };
   }
-  
+
   const refObject = {
     bridge: useRef(null),
     tower: useRef(null),
@@ -48,7 +56,7 @@ export default function Dashboard(): ReactElement {
           </StyledItems2>
         );
       })}
-      <button onClick={()=>}>테스트</button>
+      <button onClick={}>테스트</button>
     </ContentLayout>
   );
 }
