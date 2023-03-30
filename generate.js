@@ -6,7 +6,9 @@ const {
 const { parse } = require("sass-variable-parser");
 
 const variables = parse(
-  fs.readFileSync(path.resolve(__dirname, "src/Styles/vari.scss")).toString()
+  fs
+    .readFileSync(path.resolve(__dirname, "src/Styles/variables.scss"))
+    .toString()
 );
 
 const theme = createInterfacesFromObject("DefaultTheme", {

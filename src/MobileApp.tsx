@@ -4,23 +4,21 @@ import Dashboard from "@/Components/Dashboard";
 import { createGlobalStyle } from "styled-components";
 
 const BodyStyles = createGlobalStyle`
-  html {
-    overflow: hidden;
-  }
 	body {
 		overflow-x: hidden;
 		overflow-y: auto;
+    -ms-overflow-style:none;
 
 		&::-webkit-scrollbar {
-			max-width: 0px;
+      max-width: 0px;
 			max-height: 0px;
 			display: none;
 		}
-
+    
 		&::-webkit-scrollbar-thumb {
-			background-color: transparent;
+      background-color: transparent;
 		}
-	}
+  }
 `;
 
 export default function MobileApp() {

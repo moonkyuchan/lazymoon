@@ -5,6 +5,8 @@ import tower from "@/Asset/Images/french.jpeg";
 import bridge from "@/Asset/Images/bridge.jpeg";
 import home from "@/Asset/Images/home.jpeg";
 
+import { values } from "./configs";
+
 export default function Dashboard(): ReactElement {
   // const [y, setY] = useState<any>(document?.scrollingElement?.scrollHeight);
   // const [scrollDirection, setScrollDirection] = useState(
@@ -31,8 +33,48 @@ export default function Dashboard(): ReactElement {
   //   };
   // }, [handleNavigation]);
 
+  const [scroll, setScroll] = useState<number>(0);
+
+  const handle = () => {
+    const scrollY = window.scrollY;
+    setScroll(scrollY);
+    const direction = scrollY > scroll ? "Scroll Down" : "Scroll Up";
+    return direction;
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handle);
+    return () => {
+      window.removeEventListener("scroll", handle);
+    };
+  });
+
+  // const handelScroll = useCallback(() => {
+  //   console.log("작동함?");
+  //   const scrollY = window.scrollY;
+  //   console.log("ScrollY:", scrollY);
+  //   const direction = scrollY > scroll ? "Scroll Down" : "Scroll Up";
+  //   return direction;
+  // }, [scroll]);
+  // handelScroll();
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => console.log("useEffect"));
+
+  //   return () => {
+  //     window.removeEventListener("scroll", () => console.log("useEffect"));
+  //   };
+  // });
+
   return (
     <ContentLayout>
+      {values.pages.map((pages) => {
+        return (
+          <StyledItems2 key={pages.key}>
+            <StyledTitle>LAYY MOON</StyledTitle>
+          </StyledItems2>
+        );
+      })}
       <StyledItems2>
         <StyledTitle>LAYY MOON</StyledTitle>
       </StyledItems2>
