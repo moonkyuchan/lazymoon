@@ -1,46 +1,19 @@
-import { ReactElement, useState, useEffect, useCallback } from "react";
+import { ReactElement, useState, useEffect, useCallback, useRef } from "react";
 import ContentLayout from "@root/src/Layout/ContentLayout";
 import styeld from "styled-components";
-import tower from "@/Asset/Images/french.jpeg";
-import bridge from "@/Asset/Images/bridge.jpeg";
-import home from "@/Asset/Images/home.jpeg";
 
 import { values } from "./configs";
 
 export default function Dashboard(): ReactElement {
-  // const [y, setY] = useState<any>(document?.scrollingElement?.scrollHeight);
-  // const [scrollDirection, setScrollDirection] = useState(
-  //   "you have not scrolled yet"
-  // );
-
-  // const handleNavigation = useCallback(
-  //   (e) => {
-  //     if (y > window.scrollY) {
-  //       setScrollDirection("Scrolling Up");
-  //     } else if (y < window.scrollY) {
-  //       setScrollDirection("Scrolling Down");
-  //     }
-  //     setY(window.scrollY);
-  //   },
-  //   [y]
-  // );
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleNavigation);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleNavigation);
-  //   };
-  // }, [handleNavigation]);
-
   const [scroll, setScroll] = useState<number>(0);
 
-  const handle = () => {
+  const handle = useCallback(() => {
     const scrollY = window.scrollY;
     setScroll(scrollY);
     const direction = scrollY > scroll ? "Scroll Down" : "Scroll Up";
+    console.log(direction);
     return direction;
-  };
+  }, [scroll]);
 
   useEffect(() => {
     window.addEventListener("scroll", handle);
@@ -49,37 +22,33 @@ export default function Dashboard(): ReactElement {
     };
   });
 
-  // const handelScroll = useCallback(() => {
-  //   console.log("작동함?");
-  //   const scrollY = window.scrollY;
-  //   console.log("ScrollY:", scrollY);
-  //   const direction = scrollY > scroll ? "Scroll Down" : "Scroll Up";
-  //   return direction;
-  // }, [scroll]);
-  // handelScroll();
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => console.log("useEffect"));
-
-  //   return () => {
-  //     window.removeEventListener("scroll", () => console.log("useEffect"));
-  //   };
-  // });
+    const onMoveToElement = () => {
+     return element.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    
+  }
+  
+  const refObject = {
+    bridge: useRef(null),
+    tower: useRef(null),
+    home: useRef(null),
+  };
 
   return (
     <ContentLayout>
       {values.pages.map((pages) => {
         return (
-          <StyledItems2 key={pages.key}>
-            <StyledTitle>LAYY MOON</StyledTitle>
+          <StyledItems2
+            key={pages.key}
+            back={pages.name}
+            position={pages.position}
+            ref={refObject[pages.name]}
+          >
+            <StyledTitle>{pages.title}</StyledTitle>
           </StyledItems2>
         );
       })}
-      <StyledItems2>
-        <StyledTitle>LAYY MOON</StyledTitle>
-      </StyledItems2>
-      <StyledItems>1</StyledItems>
-      <StyledItems3>3</StyledItems3>
+      <button onClick={()=>}>테스트</button>
     </ContentLayout>
   );
 }
@@ -92,39 +61,61 @@ const StyledTitle = styeld.span(({ theme }) => {
   };
 });
 
-const StyledItems = styeld.section(() => {
-  return {
-    width: "auto",
-    height: "calc(100vh - 50px)",
-    background: `url(${tower})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  };
-});
+const StyledItems2 = styeld.section<{ back: string; position: string }>(
+  ({ back, position }) => {
+    return {
+      width: "auto",
+      height: "calc(100vh - 50px)",
+      background: `url(${back})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundPosition: `${position}`,
 
-const StyledItems2 = styeld.section(() => {
-  return {
-    width: "auto",
-    height: "calc(100vh - 50px)",
-    background: `url(${bridge})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "40% 60%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
+  }
+);
 
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-});
+// const [y, setY] = useState<any>(document?.scrollingElement?.scrollHeight);
+// const [scrollDirection, setScrollDirection] = useState(
+//   "you have not scrolled yet"
+// );
 
-const StyledItems3 = styeld.section(() => {
-  return {
-    minWidth: "360px",
-    height: "calc(100vh - 50px)",
-    background: `url(${home})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "left",
-  };
-});
+// const handleNavigation = useCallback(
+//   (e) => {
+//     if (y > window.scrollY) {
+//       setScrollDirection("Scrolling Up");
+//     } else if (y < window.scrollY) {
+//       setScrollDirection("Scrolling Down");
+//     }
+//     setY(window.scrollY);
+//   },
+//   [y]
+// );
+
+// useEffect(() => {
+//   window.addEventListener("scroll", handleNavigation);
+
+//   return () => {
+//     window.removeEventListener("scroll", handleNavigation);
+//   };
+// }, [handleNavigation]);
+
+// const handelScroll = useCallback(() => {
+//   console.log("작동함?");
+//   const scrollY = window.scrollY;
+//   console.log("ScrollY:", scrollY);
+//   const direction = scrollY > scroll ? "Scroll Down" : "Scroll Up";
+//   return direction;
+// }, [scroll]);
+// handelScroll();
+
+// useEffect(() => {
+//   window.addEventListener("scroll", () => console.log("useEffect"));
+
+//   return () => {
+//     window.removeEventListener("scroll", () => console.log("useEffect"));
+//   };
+// });

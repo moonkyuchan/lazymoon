@@ -33,7 +33,7 @@ export default function MobileApp() {
   );
 }
 
-const StyledLayout = styled.section(() => {
+const StyledLayout = styled.section(({}) => {
   return {
     position: "relative",
     minWidth: "360px",

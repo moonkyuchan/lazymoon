@@ -1,13 +1,26 @@
-// interface Type {
-//   key: number;
-//   name: string;
-//   title: string;
-// }
+import tower from "@/Asset/Images/french.jpeg";
+import bridge from "@/Asset/Images/bridge.jpeg";
+import home from "@/Asset/Images/home.jpeg";
 
 const pages = [
-  { key: 1, name: "tower", title: "LAZY MOON" },
-  { key: 2, name: "bridge", title: "2" },
-  { key: 3, name: "home", title: "3" },
+  {
+    key: 1,
+    name: bridge,
+    title: "LAZY MOON",
+    position: "40% 60%",
+  },
+  {
+    key: 2,
+    name: tower,
+    title: "PLACE",
+    position: "center",
+  },
+  {
+    key: 3,
+    name: home,
+    title: "DAILY",
+    position: "center",
+  },
 ];
 
 export { pages };
