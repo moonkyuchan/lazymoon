@@ -1,14 +1,17 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
 
 export default function MobileHeader(): ReactElement {
+  const history = useHistory();
+
   return (
     <StyledHeader>
       <StyledRow>
         <StyledLeft>
           <StyledMenu onClick={() => console.log("MENU")} />
-          <StyledTitle onClick={() => console.log("HOME")}>
+          <StyledTitle onClick={() => history.push("/dashboard")}>
             LAZYMOON
           </StyledTitle>
         </StyledLeft>

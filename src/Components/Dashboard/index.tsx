@@ -1,62 +1,35 @@
-import { ReactElement, useState, useEffect, useCallback, useRef } from "react";
-import ContentLayout from "@root/src/Layout/ContentLayout";
+import { ReactElement, useRef } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import styeld from "styled-components";
+import { RightOutlined } from "@ant-design/icons";
 
+import ContentLayout from "@root/src/Layout/ContentLayout";
 import { values } from "./configs";
 
 export default function Dashboard(): ReactElement {
-  const [scroll, setScroll] = useState<number>(0);
-
-  const handle = useCallback(() => {
-    const scrollY = window.scrollY;
-    setScroll(scrollY);
-    const direction = scrollY > scroll ? "Scroll Down" : "Scroll Up";
-    console.log(direction);
-    return direction;
-  }, [scroll]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handle);
-    return () => {
-      window.removeEventListener("scroll", handle);
-    };
-  });
-
-  function useMoveScrool() {
-    const refObject = {
-      bridge: useRef(null),
-      tower: useRef(null),
-      home: useRef(null),
-    };
-    const onMoveToElement = () => {
-      Object.keys(refObject)
-        .filter((d) => d === refObject[d])
-        .current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    return { refObject, onMoveToElement };
-  }
-
-  const refObject = {
-    bridge: useRef(null),
-    tower: useRef(null),
-    home: useRef(null),
-  };
+  // const [sectionNum, setSectionNum] = useState<number>(1);
+  const refs = useRef({});
+  const histoty = useHistory();
 
   return (
     <ContentLayout>
       {values.pages.map((pages) => {
         return (
-          <StyledItems2
+          <StyledItems
             key={pages.key}
             back={pages.name}
             position={pages.position}
-            ref={refObject[pages.name]}
+            ref={(element) => {
+              refs.current[pages.ref] = element;
+            }}
+            onClick={() => histoty.push(`/${pages.path}`)}
           >
-            <StyledTitle>{pages.title}</StyledTitle>
-          </StyledItems2>
+            <StyledTitle>
+              {pages.title} <StyledArrow />
+            </StyledTitle>
+          </StyledItems>
         );
       })}
-      <button onClick={}>테스트</button>
     </ContentLayout>
   );
 }
@@ -65,11 +38,17 @@ const StyledTitle = styeld.span(({ theme }) => {
   return {
     position: "absolute",
     fontSize: "40px",
+    display: "flex",
+    alignItems: "center",
     color: theme.white,
   };
 });
 
-const StyledItems2 = styeld.section<{ back: string; position: string }>(
+const StyledArrow = styeld(RightOutlined)(() => {
+  return { fontSize: "20px", marginLeft: "10px" };
+});
+
+const StyledItems = styeld.section<{ back: string; position: string }>(
   ({ back, position }) => {
     return {
       width: "auto",
@@ -85,6 +64,37 @@ const StyledItems2 = styeld.section<{ back: string; position: string }>(
     };
   }
 );
+
+// const onWheel = (event) => {
+//   const moveToSection = (key) => {
+//     refs.current[key].scrollIntoView({
+//       behavior: "smooth",
+//       block: "end",
+//     });
+//   };
+
+//   const direction = event.nativeEvent.wheelDelta > 0 ? "up" : "down";
+//   if (direction === "down") {
+//     setSectionNum(3);
+//     return moveToSection(sectionNum);
+//   } else if (direction === "up") {
+//     setSectionNum(1);
+//     return moveToSection(sectionNum);
+//   }
+// };
+
+// const handle = useCallback(() => {
+//   const scrollY = window.scrollY;
+//   setScroll(scrollY);
+//   scrollY > scroll ? setSectionNum(3) : setSectionNum(1);
+//   return moveToSection(sectionNum);
+// }, []);
+// useEffect(() => {
+//   window.addEventListener("scroll", handle);
+//   return () => {
+//     window.removeEventListener("scroll", handle);
+//   };
+// }, []);
 
 // const [y, setY] = useState<any>(document?.scrollingElement?.scrollHeight);
 // const [scrollDirection, setScrollDirection] = useState(

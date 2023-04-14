@@ -1,5 +1,6 @@
 import React, { ReactElement, useContext } from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter, Switch } from "react-router-dom";
 import DeviceContext, { DeviceProvider } from "@/Context/DeviceContext";
 
 import { ThemeProvider } from "styled-components";
@@ -17,16 +18,20 @@ const root = ReactDOM.createRoot(rootElement);
 function SwitchApp(): ReactElement {
   const { device } = useContext(DeviceContext);
   const { isMobile } = device;
-  return isMobile ? <MobileApp /> : <App />;
+  return (
+    <BrowserRouter>
+      <Switch>{isMobile ? <MobileApp /> : <App />}</Switch>
+    </BrowserRouter>
+  );
 }
 
 root.render(
-  <React.StrictMode>
+  <>
     <ResetStyles />
     <ThemeProvider theme={theme}>
       <DeviceProvider>
         <SwitchApp />
       </DeviceProvider>
     </ThemeProvider>
-  </React.StrictMode>
+  </>
 );

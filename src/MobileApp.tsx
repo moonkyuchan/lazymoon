@@ -1,7 +1,10 @@
+import { Suspense, ReactElement } from "react";
 import styled from "styled-components";
-import Header from "@/Layout/Header";
-import Dashboard from "@/Components/Dashboard";
+import Header from "@/Mobile/Layout/Header";
+import { Switch, Route, RouteProps, Redirect } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+
+import { mobileRoutes } from "@/Router/routes";
 
 const BodyStyles = createGlobalStyle`
 	body {
@@ -21,18 +24,35 @@ const BodyStyles = createGlobalStyle`
   }
 `;
 
-export default function MobileApp() {
+export default function MobileApp(): ReactElement {
   return (
     <>
       <BodyStyles />
       <StyledLayout>
         <Header />
-        <Dashboard />
+        <Switch>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route path="/" exact>
+              <Redirect to="/dashboard" />
+            </Route>
+            {mobileRoutes.map((route: any) => {
+              return (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  component={route.component}
+                  exact
+                />
+              );
+            })}
+          </Suspense>
+        </Switch>
       </StyledLayout>
     </>
   );
 }
 
+//여기도 ContentLayout 으로 빼줘야 하나?
 const StyledLayout = styled.section(({}) => {
   return {
     position: "relative",
