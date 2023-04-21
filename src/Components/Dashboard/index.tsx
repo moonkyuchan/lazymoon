@@ -1,5 +1,5 @@
 import { ReactElement, useRef } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styeld from "styled-components";
 import { RightOutlined } from "@ant-design/icons";
 
@@ -22,9 +22,8 @@ export default function Dashboard(): ReactElement {
             ref={(element) => {
               refs.current[pages.ref] = element;
             }}
-            onClick={() => histoty.push(`/${pages.path}`)}
           >
-            <StyledTitle>
+            <StyledTitle onClick={() => histoty.push(`/${pages.path}`)}>
               {pages.title} <StyledArrow />
             </StyledTitle>
           </StyledItems>
@@ -36,7 +35,7 @@ export default function Dashboard(): ReactElement {
 
 const StyledTitle = styeld.span(({ theme }) => {
   return {
-    position: "absolute",
+    // position: "absolute",
     fontSize: "40px",
     display: "flex",
     alignItems: "center",

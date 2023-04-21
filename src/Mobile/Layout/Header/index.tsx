@@ -1,25 +1,31 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
+import Sidebar from "@/Mobile/Components/Sidebar";
+
 export default function MobileHeader(): ReactElement {
   const history = useHistory();
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <StyledHeader>
-      <StyledRow>
-        <StyledLeft>
-          <StyledMenu onClick={() => console.log("MENU")} />
-          <StyledTitle onClick={() => history.push("/dashboard")}>
-            LAZYMOON
-          </StyledTitle>
-        </StyledLeft>
-        <StyledRight>
-          <StyledSearch onClick={() => console.log("SEARCH")} />
-        </StyledRight>
-      </StyledRow>
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <StyledRow>
+          <StyledLeft>
+            <StyledMenu onClick={() => setOpen(true)} />
+            <StyledTitle onClick={() => history.push("/dashboard")}>
+              LAZYMOON
+            </StyledTitle>
+          </StyledLeft>
+          <StyledRight>
+            <StyledSearch onClick={() => console.log("SEARCH")} />
+          </StyledRight>
+        </StyledRow>
+      </StyledHeader>
+      {open && <Sidebar open={open} setOpen={setOpen} />}
+    </>
   );
 }
 
