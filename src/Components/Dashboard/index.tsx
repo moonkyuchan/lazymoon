@@ -4,7 +4,7 @@ import styeld from "styled-components";
 import { RightOutlined } from "@ant-design/icons";
 
 import ContentLayout from "@root/src/Layout/ContentLayout";
-import { values } from "./configs";
+import { values } from "@/Configs";
 
 export default function Dashboard(): ReactElement {
   // const [sectionNum, setSectionNum] = useState<number>(1);

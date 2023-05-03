@@ -13,8 +13,6 @@ const variables = parse(
 
 const theme = createInterfacesFromObject("DefaultTheme", {
   ...variables,
-  mobileMedia: "",
-  headerMedia: "",
 });
 
 fs.writeFileSync(

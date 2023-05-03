@@ -1,7 +1,9 @@
 import { ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
 
-interface SidebarProps {
+import Header from "./Header";
+
+export interface SidebarProps {
   openMenu: boolean;
   setOpenMenu: (openMenu: boolean) => void;
 }
@@ -13,7 +15,7 @@ interface SidebarProps {
 function Sidebar(props: SidebarProps): ReactElement {
   const { openMenu, setOpenMenu } = props;
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setSidebarOpen(openMenu);
@@ -27,20 +29,20 @@ function Sidebar(props: SidebarProps): ReactElement {
   };
 
   return (
-    <StyledBack openMenu={sidebarOpen} onClick={handleSidebarClose}>
-      Sidebar
+    <StyledBack openMenu={sidebarOpen}>
+      <Header handleSidebarClose={handleSidebarClose} />
     </StyledBack>
   );
 }
 
 const StyledBack = styled.nav<{ openMenu: boolean }>(({ openMenu, theme }) => {
   return {
-    zIndex: 2,
+    zIndex: 1,
     background: theme.white,
     position: "fixed",
     top: 0,
     left: openMenu ? 0 : "-360px",
-    width: "360px",
+    width: "100%",
     height: "100vh",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
     transition: `left 0.3s ease-in-out`,

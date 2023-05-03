@@ -11,9 +11,7 @@
   fontSizeXl: string;
   white: string;
   black: string;
-  test: string;
-  mobileMedia: string;
-  headerMedia: string;
+  grey1: string;
 }
 
   }
