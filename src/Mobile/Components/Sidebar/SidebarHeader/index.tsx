@@ -1,11 +1,14 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setActive, selectSidebarActive } from "@root/src/Store/Slice/Sidebar";
 import styled from "styled-components";
 import { CloseOutlined } from "@ant-design/icons";
 
 import { values } from "@root/src/Configs";
 
-function Header({ handleSidebarClose }): ReactElement {
-  const [active, setActive] = useState<number>(1);
+function SidebarHeader({ handleSidebarClose }): ReactElement {
+  const dispatch = useDispatch();
+  const isActive = useSelector(selectSidebarActive);
 
   return (
     <StyledHeader>
@@ -17,8 +20,8 @@ function Header({ handleSidebarClose }): ReactElement {
         {values.pages.map((page) => (
           <StyledItem
             key={page.key}
-            onClick={() => setActive(page.key)}
-            active={active === page.key}
+            onClick={() => dispatch(setActive(page.key))}
+            active={isActive === page.key}
           >
             {page.title}
           </StyledItem>
@@ -54,4 +57,4 @@ const StyledItem = styled.div<{ active: boolean }>(({ theme, active }) => {
   };
 });
 
-export default Header;
+export default SidebarHeader;

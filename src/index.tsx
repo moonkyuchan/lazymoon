@@ -1,10 +1,12 @@
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Switch } from "react-router-dom";
 import DeviceContext, { DeviceProvider } from "@/Context/DeviceContext";
 
 import { ThemeProvider } from "styled-components";
 import ResetStyles from "@root/src/Styles/reset";
+import { Provider } from "react-redux";
+import { store } from "@/Store";
 
 import theme from "!!sass-variable-parser!./Styles/variables.scss";
 
@@ -28,10 +30,12 @@ function SwitchApp(): ReactElement {
 root.render(
   <>
     <ResetStyles />
-    <ThemeProvider theme={theme}>
-      <DeviceProvider>
-        <SwitchApp />
-      </DeviceProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <DeviceProvider>
+          <SwitchApp />
+        </DeviceProvider>
+      </ThemeProvider>
+    </Provider>
   </>
 );
