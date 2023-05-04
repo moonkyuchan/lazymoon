@@ -1,7 +1,7 @@
 import { Suspense, ReactElement } from "react";
 import styled from "styled-components";
 import Header from "@/Mobile/Layout/Header";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 import { mobileRoutes } from "@/Router/routes";

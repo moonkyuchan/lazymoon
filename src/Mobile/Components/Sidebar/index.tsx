@@ -1,10 +1,15 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSidebarIsOpen, setIsOpen } from "@root/src/Store/Slice/Sidebar";
+import {
+  selectSidebarIsOpen,
+  setIsOpen,
+  setActive,
+} from "@root/src/Store/Slice/Sidebar";
 
 import styled from "styled-components";
 
 import SidebarHeader from "./SidebarHeader";
+import SidebarContent from "./SidebarContent";
 
 export interface SidebarProps {
   openMenu: boolean;
@@ -23,6 +28,7 @@ function Sidebar(props: SidebarProps): ReactElement {
     // setSidebarOpen(openMenu);
     setTimeout(() => {
       dispatch(setIsOpen(openMenu));
+      dispatch(setActive(1));
     }, 1);
   }, [openMenu]);
 
@@ -37,6 +43,7 @@ function Sidebar(props: SidebarProps): ReactElement {
   return (
     <StyledBack openMenu={isOpen}>
       <SidebarHeader handleSidebarClose={handleSidebarClose} />
+      <SidebarContent />
     </StyledBack>
   );
 }
@@ -49,7 +56,7 @@ const StyledBack = styled.nav<{ openMenu: boolean }>(({ openMenu, theme }) => {
     top: 0,
     left: openMenu ? 0 : "-360px",
     width: "100%",
-    height: "100vh",
+    height: "780px",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
     transition: `left 0.3s ease-in-out`,
   };
