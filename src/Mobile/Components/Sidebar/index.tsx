@@ -9,7 +9,8 @@ import {
 import styled from "styled-components";
 
 import SidebarHeader from "./SidebarHeader";
-import SidebarContent from "./SidebarContent";
+import SidebarContent from "./SidebarContent";
+import SidebarFooter from "./SidebarFooter";
 
 export interface SidebarProps {
   openMenu: boolean;
@@ -44,6 +45,7 @@ function Sidebar(props: SidebarProps): ReactElement {
     <StyledBack openMenu={isOpen}>
       <SidebarHeader handleSidebarClose={handleSidebarClose} />
       <SidebarContent />
+      <SidebarFooter />
     </StyledBack>
   );
 }
