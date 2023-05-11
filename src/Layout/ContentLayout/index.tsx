@@ -3,13 +3,12 @@ import styled from "styled-components";
 
 interface ICenterLayoutProps {
   children?: ReactNode;
-  onWheel?: any;
 }
 
 export default function ContentLayout(props: ICenterLayoutProps): ReactElement {
-  const { children, onWheel } = props;
+  const { children } = props;
 
-  return <StyledLayout onWheel={onWheel}>{children}</StyledLayout>;
+  return <StyledLayout>{children}</StyledLayout>;
 }
 
 const StyledLayout = styled.section`

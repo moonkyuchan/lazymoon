@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Header from "@/Mobile/Layout/Header";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import { auth } from "@/Firebase";
 
 import { mobileRoutes } from "@/Router/routes";
 
@@ -26,7 +25,6 @@ const BodyStyles = createGlobalStyle`
 `;
 
 export default function MobileApp(): ReactElement {
-  console.log(auth);
   return (
     <>
       <BodyStyles />
@@ -61,7 +59,6 @@ const StyledLayout = styled.section(({}) => {
     minWidth: "360px",
     display: "flex",
     flexDirection: "column",
-    paddingTop: "52px",
     height: "100vh",
   };
 });

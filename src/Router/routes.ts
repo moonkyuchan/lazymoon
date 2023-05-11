@@ -1,9 +1,13 @@
 import { lazy } from "react";
 import { RouteProps } from "react-router-dom";
 
+import { Login, Register } from "@/Pages";
+
 interface RoutePropstest extends RouteProps {
   name?: string;
   key?: number;
+  path: string;
+  component?: React.FC | any;
 }
 
 const mobileRoutes: RoutePropstest[] = [
@@ -11,28 +15,43 @@ const mobileRoutes: RoutePropstest[] = [
     key: 1,
     path: "/dashboard",
     name: "dashboard",
-    component: lazy(() => import("@/Components/Dashboard")),
+    component: lazy(() => import("@root/src/Mobile/Components/Dashboard")),
   },
   {
     key: 2,
     path: "/daily",
     name: "daily",
-    component: lazy(() => import("@root/src/Components/Daily")),
+    component: lazy(() => import("@root/src/Mobile/Components/Daily")),
   },
   {
     key: 3,
     path: "/place",
     name: "place",
-    component: lazy(() => import("@root/src/Components/Place")),
+    component: lazy(() => import("@root/src/Mobile/Components/Place")),
   },
   {
     key: 4,
     path: "/etc",
     name: "etc",
-    component: lazy(() => import("@root/src/Components/Etc")),
+    component: lazy(() => import("@root/src/Mobile/Components/Etc")),
   },
 ];
 
 const webRoutes = [{}];
 
-export { mobileRoutes, webRoutes };
+const nonAuth: RoutePropstest[] = [
+  {
+    key: 1,
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    key: 2,
+    path: "/register",
+    name: "register",
+    component: Register,
+  },
+];
+
+export { mobileRoutes, webRoutes, nonAuth };

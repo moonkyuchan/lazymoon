@@ -1,7 +1,8 @@
 import { ReactElement, useContext } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import DeviceContext, { DeviceProvider } from "@/Context/DeviceContext";
+import { nonAuth } from "@/Router/routes";
 
 import { ThemeProvider } from "styled-components";
 import ResetStyles from "@root/src/Styles/reset";
@@ -22,7 +23,19 @@ function SwitchApp(): ReactElement {
   const { isMobile } = device;
   return (
     <BrowserRouter>
-      <Switch>{isMobile ? <MobileApp /> : <App />}</Switch>
+      <Switch>
+        {nonAuth.map((route) => {
+          return (
+            <Route
+              key={route.path}
+              path={route.path}
+              component={route.component}
+              exact
+            />
+          );
+        })}
+        {isMobile ? <MobileApp /> : <App />}
+      </Switch>
     </BrowserRouter>
   );
 }

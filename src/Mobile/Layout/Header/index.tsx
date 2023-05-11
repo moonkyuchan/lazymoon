@@ -1,9 +1,9 @@
 import { ReactElement, useState } from "react";
 import styled from "styled-components";
-import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
-import Sidebar from "@/Mobile/Components/Sidebar";
+import Sidebar from "@root/src/Mobile/Layout/Sidebar";
 
 export default function MobileHeader(): ReactElement {
   const history = useHistory();
@@ -21,6 +21,7 @@ export default function MobileHeader(): ReactElement {
           </StyledLeft>
           <StyledRight>
             <StyledSearch onClick={() => console.log("Search")} />
+            <StyledLogin onClick={() => history.push("/login")} />
           </StyledRight>
         </StyledRow>
       </StyledHeader>
@@ -76,5 +77,8 @@ const StyledTitle = styled.span(() => {
 });
 
 const StyledSearch = styled(SearchOutlined)(() => {
+  return { padding: "0 2px", marginRight: "15px" };
+});
+const StyledLogin = styled(UserOutlined)(() => {
   return { padding: "0 2px" };
 });

@@ -43,6 +43,6 @@ const StyledItem = styled.div(({}) => {
   return {
     fontWeight: 300,
     fontSize: "20px",
-    marginBottom: "50px",
+    marginBottom: "40px",
   };
 });

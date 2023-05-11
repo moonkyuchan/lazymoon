@@ -51,7 +51,7 @@ const StyledItems = styeld.section<{ back: string; position: string }>(
   ({ back, position }) => {
     return {
       width: "auto",
-      height: "calc(100vh - 50px)",
+      height: "calc(100vh - 0px)",
       background: `url(${back})`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
