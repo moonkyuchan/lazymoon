@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import styeld from "styled-components";
 import { RightOutlined } from "@ant-design/icons";
 
-import ContentLayout from "@root/src/Layout/ContentLayout";
 import { values } from "@/Configs";
 
 export default function Dashboard(): ReactElement {
@@ -12,7 +11,8 @@ export default function Dashboard(): ReactElement {
   const histoty = useHistory();
 
   return (
-    <ContentLayout>
+    //아래 div 이부분은 문제가 있다
+    <div style={{ width: "inherit" }}>
       {values.pages.map((pages) => {
         return (
           <StyledItems
@@ -29,13 +29,12 @@ export default function Dashboard(): ReactElement {
           </StyledItems>
         );
       })}
-    </ContentLayout>
+    </div>
   );
 }
 
 const StyledTitle = styeld.span(({ theme }) => {
   return {
-    // position: "absolute",
     fontSize: "40px",
     display: "flex",
     alignItems: "center",
@@ -50,7 +49,6 @@ const StyledArrow = styeld(RightOutlined)(() => {
 const StyledItems = styeld.section<{ back: string; position: string }>(
   ({ back, position }) => {
     return {
-      width: "auto",
       height: "calc(100vh - 0px)",
       background: `url(${back})`,
       backgroundRepeat: "no-repeat",

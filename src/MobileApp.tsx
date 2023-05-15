@@ -1,6 +1,6 @@
 import { Suspense, ReactElement } from "react";
-import styled from "styled-components";
 import Header from "@/Mobile/Layout/Header";
+import Content from "@/Mobile/Layout/Content";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
@@ -28,7 +28,7 @@ export default function MobileApp(): ReactElement {
   return (
     <>
       <BodyStyles />
-      <StyledLayout>
+      <Content>
         <Header />
         <Switch>
           <Suspense fallback={<div>Loading...</div>}>
@@ -47,18 +47,7 @@ export default function MobileApp(): ReactElement {
             })}
           </Suspense>
         </Switch>
-      </StyledLayout>
+      </Content>
     </>
   );
 }
-
-//여기도 ContentLayout 으로 빼줘야 하나?
-const StyledLayout = styled.section(({}) => {
-  return {
-    position: "relative",
-    minWidth: "360px",
-    display: "flex",
-    flexDirection: "column",
-    height: "100vh",
-  };
-});
