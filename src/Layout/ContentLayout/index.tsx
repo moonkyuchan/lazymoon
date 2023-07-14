@@ -12,7 +12,12 @@ export default function ContentLayout(props: ICenterLayoutProps): ReactElement {
   return <StyledLayout style={style}>{children}</StyledLayout>;
 }
 
-const StyledLayout = styled.section`
-  display: "flex";
-  flex-direction: "column";
-`;
+const StyledLayout = styled.section(({}) => {
+  return {
+    width: "100vw",
+    height: "100vh",
+    maxWidth: "1200px",
+    padding: "50px 70px",
+    margin: "0 auto",
+  };
+});

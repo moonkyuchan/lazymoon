@@ -9,12 +9,16 @@
   fontSizeBase: string;
   fontSizeLg: string;
   fontSizeXl: string;
+  fontFamilyB: string;
   fontFamilySb: string;
   fontFamilyM: string;
   fontFamilyL: string;
+  fontFamilyEl: string;
+  fontFamilyT: string;
   white: string;
   black: string;
   grey1: string;
+  grey2: string;
 }
 
   }
