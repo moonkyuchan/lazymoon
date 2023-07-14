@@ -1,18 +1,9 @@
-import styled from "styled-components";
-import Header from "@/Layout/Header";
-import Dashboard from "@root/src/Mobile/Components/Dashboard";
+import { Header, ContentLayout } from "@/Layout";
 
 export default function App() {
   return (
-    <Container>
+    <ContentLayout>
       <Header />
-      <Dashboard />
-    </Container>
+    </ContentLayout>
   );
 }
-
-const Container = styled.div(({}) => {
-  return {
-    // backgroundColor: theme.colors.black,
-  };
-});

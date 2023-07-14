@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { RouteProps } from "react-router-dom";
 
-import { Login, Register } from "@/Pages";
+import { Login, Register, Join } from "@/Pages";
 
 interface RoutePropstest extends RouteProps {
   name?: string;
@@ -51,6 +51,12 @@ const nonAuth: RoutePropstest[] = [
     path: "/register",
     name: "register",
     component: Register,
+  },
+  {
+    key: 3,
+    path: "/join",
+    name: "join",
+    component: Join,
   },
 ];
 

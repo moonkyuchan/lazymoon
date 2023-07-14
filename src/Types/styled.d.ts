@@ -9,6 +9,9 @@
   fontSizeBase: string;
   fontSizeLg: string;
   fontSizeXl: string;
+  fontFamilySb: string;
+  fontFamilyM: string;
+  fontFamilyL: string;
   white: string;
   black: string;
   grey1: string;

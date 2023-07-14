@@ -5,9 +5,8 @@ export default function WebHeader(): ReactElement {
   return (
     <StyledHeader>
       <StyledRow>
-        <div>햄버거</div>
-        <div>검색</div>
-        <div></div>
+        <StyledTitle>햄버거</StyledTitle>
+        <StyledTitle2>함바가</StyledTitle2>
       </StyledRow>
     </StyledHeader>
   );
@@ -19,4 +18,18 @@ const StyledHeader = styled.header(({ theme }) => {
 
 const StyledRow = styled.div<{}>(({ theme }) => {
   return {};
+});
+
+const StyledTitle = styled.span(({ theme }) => {
+  return {
+    fontSize: "40px",
+    fontFamily: theme.fontFamilyL,
+  };
+});
+
+const StyledTitle2 = styled.span(({ theme }) => {
+  return {
+    fontSize: "50px",
+    fontFamily: theme.fontFamilySb,
+  };
 });

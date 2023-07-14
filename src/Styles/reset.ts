@@ -4,31 +4,35 @@ import { createGlobalStyle } from "styled-components";
 const ResetStyles = createGlobalStyle`
 ${reset}
 
-/* @font-face {
-  font-family: Light;
-  src: url(${require("@/Asset/Font/AnyConv.com__GothicA1-Light.woff")}) format('woff2');
+@font-face {
+  font-family: SemiBold;
+  src: url(${require("@/Asset/Font/IBMPlexSansKR-SemiBold.ttf")}) format('ttf');
+  font-weight: bold;
+  font-style: normal;
 }
-
+@font-face {
+  font-family: Medium;
+  src: url(${require("@/Asset/Font/IBMPlexSansKR-Medium.ttf")}) format('ttf');
+  font-style: normal;
+}
+@font-face {
+  font-family: Regular;
+  src: url(${require("@/Asset/Font/IBMPlexSansKR-Regular.ttf")}) format('ttf');
+  font-style: normal;
+}
 @font-face {
   font-family: Light;
-  src: url(${require("@/Asset/Font/AnyConv.com__GothicA1-Light.woff")}) format('woff2');
+  src: url(${require("@/Asset/Font/IBMPlexSansKR-Light.ttf")}) format('ttf');
+  font-style: normal;
 }
 
-@font-face {
-  font-family: Light;
-  src: url(${require("@/Asset/Font/AnyConv.com__GothicA1-Light.woff")}) format('woff2');
-} */
 
 * {
   box-sizing: border-box;
 }
 
-
-
 body{
-font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-/* font-family:Light ;
-font-weight: 700 ; */
+  font-family:"Regular";
 }
 
 `;
