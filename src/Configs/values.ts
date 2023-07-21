@@ -5,27 +5,33 @@ import home from "@/Asset/Images/home.jpeg";
 const pages = [
   {
     key: 1,
-    ref: "1",
-    name: bridge,
+    img: bridge,
     title: "DAILY",
-    path: "daily",
-    position: "40% 60%",
+    content: "daily",
   },
   {
     key: 2,
-    ref: "2",
-    name: tower,
+    img: tower,
     title: "PLACE",
-    path: "place",
-    position: "center",
+    content: "place",
   },
   {
     key: 3,
-    ref: "3",
-    name: home,
+    img: home,
     title: "ET CETERA",
-    path: "etc",
-    position: "center",
+    content: "etc",
+  },
+  {
+    key: 4,
+    img: tower,
+    title: "PLACE",
+    content: "place",
+  },
+  {
+    key: 5,
+    img: home,
+    title: "ET CETERA",
+    content: "etc",
   },
 ];
 
