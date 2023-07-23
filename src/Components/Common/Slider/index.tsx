@@ -1,12 +1,11 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import { SwiperOptions } from "swiper/types/swiper-options";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Navigation } from "swiper/modules";
+import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
 import styled from "styled-components";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { SlideCardType } from "@root/src/Configs/types";
@@ -22,11 +21,14 @@ export default function LayoutSlider({
 }): ReactElement<OwnProps> {
   const settings: SwiperOptions = {
     effect: "coverflow",
-    spaceBetween: 40,
+    loop: true,
+    speed: 500,
+    autoplay: {
+      delay: 3000,
+    },
     grabCursor: true,
     centeredSlides: true,
-    slideToClickedSlide: true,
-    slidesPerView: 5,
+    slidesPerView: "auto",
     coverflowEffect: {
       rotate: 5,
       stretch: 0,
@@ -35,11 +37,9 @@ export default function LayoutSlider({
       slideShadows: true,
     },
 
-    pagination: { el: ".swiper-pagination", clickable: true },
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
-      clickable: true,
     },
     modules: [EffectCoverflow, Navigation],
   };
@@ -47,41 +47,37 @@ export default function LayoutSlider({
   return (
     <StyledArticle>
       <StyledTitle>{title}</StyledTitle>
-      <StyledSwiper {...settings} className="mySwiper">
-        {values.pages.map((data, idx) => {
+      <StyledSwiper {...settings}>
+        {values.pages.map((data) => {
           return (
             <SwiperSlide
-              key={idx}
-              onClick={() => {
-                console.log(data.key);
+              data-swiper-slide-index={data.key}
+              key={data.key}
+              onClick={(e) => {
+                console.log(e);
               }}
             >
               <img src={data.img} alt={data.title} />
             </SwiperSlide>
           );
         })}
-        <StyledControl className="slider-controler">
-          <div className="swiper-button-prev slider-arrow">
-            <div className="arrow-back-outline"></div>
-          </div>
-          <div className="swiper-button-next slider-arrow">
-            <div className="arrow-forward-outline"></div>
-          </div>
-        </StyledControl>
+        <div className="swiper-button-prev"></div>
+        <div className="swiper-button-next"></div>
       </StyledSwiper>
     </StyledArticle>
   );
 }
 
 const StyledArticle = styled.article(({}) => {
-  return { margin: "20px auto" };
+  return { margin: "20px auto", position: "relative" };
 });
+
 const StyledSwiper = styled(Swiper)(({}) => {
   return {
     padding: "20px 0",
+    width: "inherit",
     [".swiper-slide"]: {
-      backgroundPosition: "center",
-      backgroundSize: "center",
+      width: "300px",
 
       ["img"]: {
         width: "300px",
@@ -90,21 +86,9 @@ const StyledSwiper = styled(Swiper)(({}) => {
       },
     },
 
-    [".swiper-slide-shadow-left .swiper-slide-shadow-right"]: {
+    [".swiper-slide-shadow-left"]: {
       display: "none",
     },
-  };
-});
-
-const StyledControl = styled.div(({}) => {
-  return {
-    // [".slider-controler"]: {
-    //   position: "relative",
-    //   bottom: "10px",
-    //   display: "flex",
-    //   alignItems: " center",
-    //   justifyContent: "center",
-    // },
   };
 });
 
