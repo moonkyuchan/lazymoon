@@ -19,6 +19,7 @@
   black: string;
   grey1: string;
   grey2: string;
+  grey3: string;
 }
 
   }

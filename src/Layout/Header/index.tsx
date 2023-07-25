@@ -46,6 +46,7 @@ const StyledHeader = styled.header(() => {
     alignItems: "center",
     justifyContent: "space-between",
     padding: "0 20px",
+    margin: "0 auto",
     height: "80px",
   };
 });

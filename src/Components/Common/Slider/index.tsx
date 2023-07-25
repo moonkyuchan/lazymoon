@@ -29,6 +29,7 @@ export default function LayoutSlider({
     grabCursor: true,
     centeredSlides: true,
     slidesPerView: "auto",
+    slideToClickedSlide: true,
     coverflowEffect: {
       rotate: 5,
       stretch: 0,
@@ -45,13 +46,12 @@ export default function LayoutSlider({
   };
 
   return (
-    <StyledArticle>
+    <StyledSection>
       <StyledTitle>{title}</StyledTitle>
       <StyledSwiper {...settings}>
         {values.pages.map((data) => {
           return (
             <SwiperSlide
-              data-swiper-slide-index={data.key}
               key={data.key}
               onClick={(e) => {
                 console.log(e);
@@ -64,17 +64,18 @@ export default function LayoutSlider({
         <div className="swiper-button-prev"></div>
         <div className="swiper-button-next"></div>
       </StyledSwiper>
-    </StyledArticle>
+    </StyledSection>
   );
 }
 
-const StyledArticle = styled.article(({}) => {
+const StyledSection = styled.section(({}) => {
   return { margin: "20px auto", position: "relative" };
 });
 
-const StyledSwiper = styled(Swiper)(({}) => {
+const StyledSwiper = styled(Swiper)(({ theme }) => {
   return {
     padding: "20px 0",
+    maring: "0 auto",
     width: "inherit",
     [".swiper-slide"]: {
       width: "300px",
@@ -83,6 +84,7 @@ const StyledSwiper = styled(Swiper)(({}) => {
         width: "300px",
         height: "300px",
         borderRadius: "4px",
+        border: `1px solid ${theme.grey1}`,
       },
     },
 

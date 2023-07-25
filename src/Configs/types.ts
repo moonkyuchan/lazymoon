@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export type SlideCardType = {
   key: number;
   img: string;
@@ -6,6 +8,14 @@ export type SlideCardType = {
   //함수가 리턴값이 있다면 타입정의 아니라면
   //example():void;
 }[];
+
+export type CardType = {
+  key: number;
+  title: string;
+  img: string;
+  comment: number;
+  date: moment.Moment;
+};
 
 //코딩알려주는 누나 타입 지정 예시
 // export type Restaurant={
