@@ -12,9 +12,9 @@ export default function SidebarContent(): ReactElement {
   return (
     <StyledBack>
       <StyledWrap>
-        {values.navs[tab].map((nav) => (
+        {/* {values.navs[tab].map((nav) => (
           <StyledItem key={nav.key}>{nav.name}</StyledItem>
-        ))}
+        ))} */}
       </StyledWrap>
     </StyledBack>
   );

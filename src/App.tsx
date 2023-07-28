@@ -1,5 +1,5 @@
-import { Header, ContentLayout, Grid } from "@/Layout";
-import { Slider, Card } from "@/Components/Common";
+import { Header, ContentLayout, GridFilter } from "@/Layout";
+import { Slider } from "@/Components/Common";
 import { values } from "@/Configs";
 import moment from "moment";
 import tower from "@/Asset/Images/french.jpeg";
@@ -13,6 +13,7 @@ export default function App() {
       img: bridge,
       title: "[신사동맛집] 아 배고파배고파보ㄴ",
       comment: 25,
+      tag: ["place"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -21,6 +22,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
+      tag: ["artsCulture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -28,6 +30,7 @@ export default function App() {
       img: home,
       title: "ET CETERA",
       comment: 123,
+      tag: ["food", "cafe"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -35,6 +38,7 @@ export default function App() {
       img: tower,
       title: "PLACE",
       comment: 54,
+      tag: ["place", "film"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -42,6 +46,7 @@ export default function App() {
       img: home,
       title: "ET CETERA",
       comment: 1203,
+      tag: ["place", "artsCulture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -50,6 +55,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
+      tag: ["fashion"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -58,6 +64,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
+      tag: ["fashion", "place"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -66,6 +73,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
+      tag: ["fashion", "artsCulture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -74,6 +82,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
+      tag: ["film", "artsCulture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -82,6 +91,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
+      tag: ["fashion", "place"],
       date: moment().format("YYYY-MM-DD"),
     },
   ];
@@ -90,11 +100,7 @@ export default function App() {
     <ContentLayout>
       <Header />
       <Slider values={values} title={"Best"} />
-      <Grid>
-        {MokCard.map((data) => {
-          return <Card data={data} key={data.key} />;
-        })}
-      </Grid>
+      <GridFilter data={MokCard} filter={values.category} />
     </ContentLayout>
   );
 }

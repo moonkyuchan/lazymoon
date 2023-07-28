@@ -1,5 +1,5 @@
 import Header from "./Header";
 import ContentLayout from "./ContentLayout";
-import Grid from "./Grid";
+import GridFilter from "./GridFilter";
 
-export { Header, ContentLayout, Grid };
+export { Header, ContentLayout, GridFilter };

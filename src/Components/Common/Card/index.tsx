@@ -49,12 +49,13 @@ const StyledImg = styled.img(() => {
 const StyledTitle = styled.div(({ theme }) => {
   return {
     height: "50px",
-    fontSize: theme.fontSizeXl,
-    fontFamily: theme.fontFamilyL,
+    fontSize: theme.fontSizeLg,
+    fontFamily: theme.fontFamilySb,
     margin: "5px 0",
+    padding: "0 3px",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    lineHeight: 1.2,
+    lineHeight: 1.5,
     display: "-webkit-box",
     WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",

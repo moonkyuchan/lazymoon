@@ -11,9 +11,10 @@ export type SlideCardType = {
 
 export type CardType = {
   key: number;
-  title: string;
   img: string;
+  title: string;
   comment: number;
+  tag: string[];
   date: moment.Moment;
 };
 
