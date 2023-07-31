@@ -1,4 +1,4 @@
-import { Header, ContentLayout, GridFilter } from "@/Layout";
+import { Header, ContentLayout, GridFilter, Footer } from "@/Layout";
 import { Slider } from "@/Components/Common";
 import { values } from "@/Configs";
 import moment from "moment";
@@ -101,6 +101,7 @@ export default function App() {
       <Header />
       <Slider values={values} title={"Best"} />
       <GridFilter data={MokCard} filter={values.category} />
+      <Footer />
     </ContentLayout>
   );
 }
