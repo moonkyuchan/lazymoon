@@ -11,7 +11,7 @@ export default function App() {
     {
       key: 1,
       img: bridge,
-      title: "[신사동맛집] 아 배고파배고파보ㄴ",
+      title: "[신사동맛집] 아 배고파배고파보",
       comment: 25,
       tag: ["place"],
       date: moment().format("YYYY-MM-DD"),
@@ -22,7 +22,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
-      tag: ["artsCulture"],
+      tag: ["artsculture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -38,7 +38,7 @@ export default function App() {
       img: tower,
       title: "PLACE",
       comment: 54,
-      tag: ["place", "film"],
+      tag: ["place", "films"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -46,7 +46,7 @@ export default function App() {
       img: home,
       title: "ET CETERA",
       comment: 1203,
-      tag: ["place", "artsCulture"],
+      tag: ["place", "artsculture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -73,7 +73,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
-      tag: ["fashion", "artsCulture"],
+      tag: ["fashion", "artsculture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {
@@ -82,7 +82,7 @@ export default function App() {
       title:
         "[PLACE] 논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 맛집논현동 ",
       comment: 12,
-      tag: ["film", "artsCulture"],
+      tag: ["films", "artsculture"],
       date: moment().format("YYYY-MM-DD"),
     },
     {

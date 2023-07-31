@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useMemo } from "react";
 import styeld from "styled-components";
 
 import { CardType } from "@root/src/Configs/types";
@@ -11,7 +11,14 @@ interface OwnProps {
 
 function GridFilter(props): ReactElement<OwnProps> {
   const { data, filter } = props;
-  const [currentTab, setCurrentTab] = useState(props.filter[0].title);
+  const [currentTab, setCurrentTab] = useState(props.filter[0].tag);
+
+  const filteredData = useMemo(() => {
+    if (currentTab === "all") {
+      return data;
+    }
+    return data.filter((data) => data.tag.includes(currentTab));
+  }, [currentTab]);
 
   const handleTab = (e) => {
     const {
@@ -28,7 +35,7 @@ function GridFilter(props): ReactElement<OwnProps> {
             <StyledFilterElement
               key={category.key}
               title={currentTab}
-              value={category.title}
+              value={category.tag}
               onClick={handleTab}
             >
               {category.title}
@@ -37,7 +44,7 @@ function GridFilter(props): ReactElement<OwnProps> {
         })}
       </StyledFilterWrap>
       <StyledGrid>
-        {data.map((data) => {
+        {filteredData.map((data) => {
           return <Card data={data} key={data.key} />;
         })}
       </StyledGrid>

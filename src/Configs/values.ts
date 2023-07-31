@@ -36,11 +36,11 @@ const pages = [
 ];
 
 const category = [
-  { key: 1, title: "All Articles" },
-  { key: 2, title: "Place" },
-  { key: 3, title: "Arts & Culture" },
-  { key: 4, title: "Fashion" },
-  { key: 5, title: "Films" },
+  { key: 1, title: "All Articles", tag: "all" },
+  { key: 2, title: "Place", tag: "place" },
+  { key: 3, title: "Arts & Culture", tag: "artsculture" },
+  { key: 4, title: "Fashion", tag: "fashion" },
+  { key: 5, title: "Films", tag: "films" },
 ];
 
 export { pages, category };
