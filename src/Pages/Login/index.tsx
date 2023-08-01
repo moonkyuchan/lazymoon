@@ -18,11 +18,7 @@ function Login(): ReactElement {
   return (
     <ContentLayout
       style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
+        height: isMobile ? "100vh" : "100vh",
         padding: isMobile ? "0" : "50px 70px",
       }}
     >
@@ -72,13 +68,14 @@ const StyledTitle = styled.div(({ theme }) => {
   return {
     fontFamily: theme.fontFamilySb,
     fontSize: theme.fontSizeXxl,
-    marginBottom: "40px",
+    margin: "100px 0 40px 0",
   };
 });
 
 const StyledForm = styled.form<{ $mobile: boolean }>(({ theme, $mobile }) => {
   return {
-    width: $mobile ? "" : "500px",
+    maxWidth: $mobile ? "330px" : "500px",
+    margin: "0 auto",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
