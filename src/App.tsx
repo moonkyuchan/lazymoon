@@ -97,9 +97,10 @@ export default function App() {
   ];
   return (
     //회원유형별 보여주기 한번 필터링 필요
+    //Slider values는 좋아요 sort 순으로 상위 10개만
     <ContentLayout>
       <Header />
-      <Slider values={values} title={"Best"} />
+      <Slider values={values} title={""} />
       <GridFilter data={MokCard} filter={values.category} />
       <Footer />
     </ContentLayout>

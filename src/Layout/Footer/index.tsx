@@ -51,7 +51,7 @@ const StyledFooter = styled.footer(() => {
 
 const StyledIcon = styled(Icon)(() => {
   return {
-    fontSize: "30px",
+    fontSize: "25px",
     margin: "0 6px",
   };
 });
