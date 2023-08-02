@@ -2,6 +2,12 @@ import { ReactElement, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { setUid } from "@root/src/Store/Slice/Uid";
+
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "@/Firebase";
+
 import DeviceContext from "@/Context/DeviceContext";
 
 // import Content from "@/Mobile/Layout/Content";
@@ -12,8 +18,54 @@ function Login(): ReactElement {
   const { device } = useContext(DeviceContext);
   const { isMobile } = device;
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const ButtonArr: {
+    key: number;
+    title: string;
+    login?: () => Promise<void>;
+  }[] = [
+    {
+      key: 1,
+      title: "GOOGLE Login",
+      login: handleGoogleLogin,
+    },
+    {
+      key: 2,
+      title: "NAVER Login",
+      // login: handleGoogleLogin(e),
+    },
+    {
+      key: 3,
+      title: "KAKAO Login",
+      // login: handleGoogleLogin(e),
+    },
+  ];
+
+  async function handleGoogleLogin() {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider)
+        .then(async (result) => {
+          const token = await result.user.getIdToken();
+          const uid = await result.user.uid;
+          if (token) {
+            localStorage.setItem("token", token);
+          }
+          dispatch(setUid(uid));
+        })
+        .then(() => history.push("/"));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <ContentLayout
@@ -22,14 +74,7 @@ function Login(): ReactElement {
         padding: isMobile ? "0" : "50px 70px",
       }}
     >
-      {/* <StyledHeader>
-        <LeftOutlined
-          style={{ fontSize: "20px", paddingRight: "10px" }}
-          onClick={() => history.goBack()}
-        />
-        <StyledTitle>Login</StyledTitle>
-      </StyledHeader> */}
-      <StyledForm $mobile={isMobile}>
+      <StyledForm $mobile={isMobile} onSubmit={handleSubmit}>
         <StyledTitle>LAZYMOON</StyledTitle>
         <StyledInput
           placeholder="Email"
@@ -43,15 +88,13 @@ function Login(): ReactElement {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <StyledWideButton onClick={() => console.log("GOOGLE")}>
-          GOOGLE Login
-        </StyledWideButton>
-        <StyledWideButton onClick={() => console.log("NAVER")}>
-          NAVER Login
-        </StyledWideButton>
-        <StyledWideButton onClick={() => console.log("KAKAO")}>
-          KAKAO Login
-        </StyledWideButton>
+        {ButtonArr.map((data) => {
+          return (
+            <StyledWideButton key={data.key} onClick={data.login}>
+              {data.title}
+            </StyledWideButton>
+          );
+        })}
         <StyledButtonWrap>
           <StyledButton onClick={() => history.push("/")}>Cancel</StyledButton>
           <StyledButton type="submit">Login</StyledButton>

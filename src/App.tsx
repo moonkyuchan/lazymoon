@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import { selectUid } from "./Store/Slice/Uid";
+
 import { Header, ContentLayout, GridFilter, Footer } from "@/Layout";
 import { Slider } from "@/Components/Common";
 import { values } from "@/Configs";
@@ -7,6 +10,8 @@ import bridge from "@/Asset/Images/bridge.jpeg";
 import home from "@/Asset/Images/home.jpeg";
 
 export default function App() {
+  const uid = useSelector(selectUid);
+  console.log(uid);
   const MokCard = [
     {
       key: 1,
