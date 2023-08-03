@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { setUid } from "@root/src/Store/Slice/Uid";
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "@/Firebase";
@@ -18,7 +17,6 @@ function Login(): ReactElement {
   const { device } = useContext(DeviceContext);
   const { isMobile } = device;
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -51,11 +49,9 @@ function Login(): ReactElement {
       await signInWithPopup(auth, provider)
         .then(async (result) => {
           const token = await result.user.getIdToken();
-          const uid = await result.user.uid;
           if (token) {
             localStorage.setItem("token", token);
           }
-          dispatch(setUid(uid));
         })
         .then(() => history.push("/"));
     } catch (error) {
