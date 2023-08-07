@@ -37,7 +37,20 @@ const mobileRoutes: RoutePropstest[] = [
   },
 ];
 
-const webRoutes = [{}];
+const webRoutes = [
+  {
+    key: 1,
+    path: "/dashboard",
+    name: "dashboard",
+    component: lazy(() => import("@root/src/Components/Dashboard")),
+  },
+  {
+    key: 2,
+    path: "/register",
+    name: "register",
+    component: Register,
+  },
+];
 
 const nonAuth: RoutePropstest[] = [
   {
@@ -46,14 +59,9 @@ const nonAuth: RoutePropstest[] = [
     name: "login",
     component: Login,
   },
+
   {
     key: 2,
-    path: "/register",
-    name: "register",
-    component: Register,
-  },
-  {
-    key: 3,
     path: "/join",
     name: "join",
     component: Join,

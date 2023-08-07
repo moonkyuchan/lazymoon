@@ -2,16 +2,16 @@ import { ReactElement, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "@/Firebase";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { InitialAuth } from "@/Firebase";
 
 import DeviceContext from "@/Context/DeviceContext";
 
-// import Content from "@/Mobile/Layout/Content";
 import { ContentLayout } from "@root/src/Layout";
-// import { LeftOutlined } from "@ant-design/icons";
 
 function Login(): ReactElement {
   const { device } = useContext(DeviceContext);
@@ -46,7 +46,7 @@ function Login(): ReactElement {
   async function handleGoogleLogin() {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider)
+      await signInWithPopup(InitialAuth, provider)
         .then(async (result) => {
           const token = await result.user.getIdToken();
           if (token) {
@@ -59,8 +59,19 @@ function Login(): ReactElement {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(InitialAuth, email, password).then(
+        (user) => {
+          if (user) {
+            history.push("/");
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -127,7 +138,7 @@ const StyledInput = styled.input(({ theme }) => {
     width: "100%",
     height: "50px",
     margin: "15px 0",
-    padding: "0 10px",
+    padding: "0 20px",
     borderRadius: "5px",
     color: theme.black,
     fontSize: theme.fontSizeLg,

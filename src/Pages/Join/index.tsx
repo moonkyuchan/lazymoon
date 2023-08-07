@@ -2,23 +2,21 @@ import { ReactElement, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { InitialAuth } from "@root/src/Firebase";
 import DeviceContext from "@/Context/DeviceContext";
 
 import { ContentLayout } from "@root/src/Layout";
 
-interface UserType {
-  email: string;
-  password: string;
-  repassword: string;
-  name: string;
-  phone?: number;
-}
+import { values } from "./Config";
+import { UserType } from "@root/src/Configs/types";
 
 function Join(): ReactElement {
   const { device } = useContext(DeviceContext);
   const { isMobile } = device;
   const history = useHistory();
 
+  const [check, setCheck] = useState<boolean>(true);
   const [userData, setUserData] = useState<UserType>({
     email: "",
     password: "",
@@ -27,51 +25,47 @@ function Join(): ReactElement {
     phone: 0,
   });
 
-  const inputArr: {
-    key: number;
-    type: string;
-    placeholder: string;
-    title: string;
-    name?: string;
-  }[] = [
-    {
-      key: 1,
-      type: "text",
-      placeholder: "이메일을 입력해주세요.",
-      title: "Email",
-      name: "email",
-    },
-    {
-      key: 2,
-      type: "password",
-      placeholder: "비밀번호를 입력해주세요.",
-      title: "Password",
-      name: "password",
-    },
-    {
-      key: 3,
-      type: "password",
-      placeholder: "비밀번호를 다시 입력해주세요.",
-      title: "Confirm Password",
-      name: "repassword",
-    },
-    {
-      key: 4,
-      type: "text",
-      placeholder: "닉네임을 입력해주세요.",
-      title: "Name",
-      name: "name",
-    },
-  ];
-
-  const handle = (e) => {
+  //validation은 MVP 이후에 진행하자
+  const handleLogin = (e) => {
     const {
       target: { value, name },
     } = e;
-    setUserData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    switch (name) {
+      // case "password":
+      //   if (name === "password" && value === userData.repassword) {
+      //     setUserData((prev) => ({
+      //       ...prev,
+      //       [name]: value,
+      //     }));
+      //     setCheck(true);
+      //   } else {
+      //     setCheck(false);
+      //   }
+      //   break;
+
+      default:
+        setUserData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+    }
+  };
+  //굳이 여기서 비동기 처리를 할 필요가 있나?
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(
+        InitialAuth,
+        userData.email,
+        userData.password
+      ).then((userCredential) => {
+        if (userCredential) {
+          history.push("/login");
+        }
+      });
+    } catch (error) {
+      console.log("ERROR M :", error);
+    }
   };
 
   return (
@@ -81,9 +75,9 @@ function Join(): ReactElement {
         padding: isMobile ? "0" : "50px 70px",
       }}
     >
-      <StyledForm $mobile={isMobile}>
+      <StyledForm $mobile={isMobile} onSubmit={handleSubmit}>
         <StyledTitle>LAZYMOON</StyledTitle>
-        {inputArr.map((input) => {
+        {values.inputArr.map((input) => {
           return (
             <StyledInputWrap $mobile={isMobile} key={input.key}>
               <StyledInputTitle>{input.title}</StyledInputTitle>
@@ -92,7 +86,7 @@ function Join(): ReactElement {
                 placeholder={input.placeholder}
                 type={input.type}
                 name={input.name}
-                onChange={handle}
+                onChange={handleLogin}
               />
             </StyledInputWrap>
           );
@@ -116,7 +110,7 @@ const StyledTitle = styled.div(({ theme }) => {
 
 const StyledForm = styled.form<{ $mobile: boolean }>(({ theme, $mobile }) => {
   return {
-    maxWidth: $mobile ? "330px" : "700px",
+    maxWidth: $mobile ? "330px" : "600px",
     margin: "0 auto",
     display: "flex",
     flexDirection: "column",

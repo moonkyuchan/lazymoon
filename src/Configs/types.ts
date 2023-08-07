@@ -18,6 +18,14 @@ export type CardType = {
   date: moment.Moment;
 };
 
+export interface UserType {
+  email: string;
+  password: string;
+  repassword: string;
+  name: string;
+  phone?: number;
+}
+
 //코딩알려주는 누나 타입 지정 예시
 // export type Restaurant={
 //   name:string,

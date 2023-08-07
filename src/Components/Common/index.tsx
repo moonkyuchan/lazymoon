@@ -1,4 +1,5 @@
 import Slider from "./Slider";
 import Card from "./Card";
+import GridFilter from "./GridFilter";
 
-export { Slider, Card };
+export { Slider, Card, GridFilter };

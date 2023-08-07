@@ -55,7 +55,7 @@ const StyledTitle = styled.div(({ theme }) => {
     padding: "0 3px",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    lineHeight: 1.5,
+    lineHeight: 1.6,
     display: "-webkit-box",
     WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
