@@ -91,9 +91,9 @@ const StyledInput = styled.input<{ show: Boolean }>(({ show, theme }) => {
 });
 
 const sharedIconStyles = ({ theme }) => ({
-  fontSize: "22px",
+  fontSize: "24px",
   padding: "0 4px 3px 4px",
-  margin: "0 4px",
+  margin: "0 5px",
   [":hover"]: {
     color: theme.grey2,
     borderBottom: `1px solid ${theme.grey2}`,

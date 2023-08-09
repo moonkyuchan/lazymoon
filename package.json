@@ -6,6 +6,7 @@
     "@ant-design/icons": "^5.0.1",
     "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@toast-ui/react-editor": "^3.2.3",
     "axios": "^1.4.0",
     "craco-alias": "^3.0.1",
     "firebase": "^9.21.0",
@@ -25,7 +26,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "GENERATE_SOURCEMAP=false craco start",
     "prestart": "node ./generate.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
