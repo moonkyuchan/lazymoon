@@ -1,36 +1,23 @@
-import { ReactElement, useRef } from "react";
-import { useHistory } from "react-router-dom";
-
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import "@toast-ui/editor/dist/i18n/ko-kr";
+import { ReactElement } from "react";
 import { ContentLayout } from "@root/src/Layout";
+import styled from "styled-components";
+
+import Quill from "./Quill";
+import Title from "./Title";
 
 function Register(): ReactElement {
-  const history = useHistory();
-
-  const editorRef = useRef<any>(null);
-  const handleFocus = () => {
-    console.log("focus!!");
-  };
   return (
     <ContentLayout
-      excepted={`${history.location.pathname}`}
-      newStyle={{ width: "100%" }}
+      newStyle={{ maxWidth: "1400px", margin: "0 auto", marginTop: "40px" }}
     >
-      <Editor
-        ref={editorRef}
-        previewStyle="vertical"
-        height="1000px"
-        initialEditType="markdown"
-        initialValue=""
-        onFocus={handleFocus}
-        language="ko-KR"
-        hideModeSwitch={true}
-        previewHighlight={false}
-      />
+      <Title />
+      <Quill />
     </ContentLayout>
   );
 }
+
+const StyledWrap = styled.main(() => {
+  return {};
+});
 
 export default Register;

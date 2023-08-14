@@ -40,6 +40,12 @@ ${reset}
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Edensor';
+  src: url(${require("@/Asset/Font/Edensor-FREE.otf")}) format('opentype');
+  font-style: normal;
+
+
 
 
 

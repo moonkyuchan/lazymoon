@@ -16,6 +16,7 @@
   fontFamilyL: string;
   fontFamilyEl: string;
   fontFamilyT: string;
+  fontFamilyEd: string;
   white: string;
   black: string;
   grey1: string;

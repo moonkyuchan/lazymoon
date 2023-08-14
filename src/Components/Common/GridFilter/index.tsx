@@ -79,8 +79,8 @@ const StyledFilterElement = styeld.button<{ value: string; title: string }>(
       border: "none",
       background: "none",
       fontFamily:
-        value === title ? `${theme.fontFamilySb}` : `${theme.fontFamilyEl}`,
-      fontSize: value === title ? `${theme.fontSizeXl}` : `${theme.fontSizeXs}`,
+        value === title ? `${theme.fontFamilySb}` : `${theme.fontFamilyEd}`,
+      fontSize: value === title ? `${theme.fontSizeXl}` : `${theme.fontSizeLg}`,
       color: value === title ? `${theme.black}` : `${theme.grey2}`,
       cursor: "pointer",
       [":hover"]: {

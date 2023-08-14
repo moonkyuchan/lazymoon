@@ -45,7 +45,8 @@ const StyledFooter = styled.footer(() => {
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-    marginTop: "50px",
+    maxWidth: "1300px",
+    margin: "50px auto",
   };
 });
 

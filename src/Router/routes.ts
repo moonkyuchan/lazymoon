@@ -19,9 +19,9 @@ const mobileRoutes: RoutePropstest[] = [
   },
   {
     key: 2,
-    path: "/daily",
-    name: "daily",
-    component: lazy(() => import("@root/src/Mobile/Components/Daily")),
+    path: "/register",
+    name: "register",
+    component: Register,
   },
   {
     key: 3,

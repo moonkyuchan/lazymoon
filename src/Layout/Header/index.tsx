@@ -42,11 +42,13 @@ export default function WebHeader(): ReactElement {
 
 const StyledHeader = styled.header(() => {
   return {
+    maxWidth: "1300px",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "0 20px",
+    padding: "0 70px",
     margin: "0 auto",
+    marginTop: "50px",
     height: "80px",
   };
 });

@@ -69,7 +69,7 @@ export default function LayoutSlider({
 }
 
 const StyledSection = styled.section(({}) => {
-  return { margin: "20px auto", position: "relative" };
+  return { position: "relative" };
 });
 
 const StyledSwiper = styled(Swiper)(({ theme }) => {
