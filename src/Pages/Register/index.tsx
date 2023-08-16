@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Quill from "./Quill";
 import Title from "./Title";
+import Submit from "./Submit";
 
 function Register(): ReactElement {
   return (
@@ -12,6 +13,7 @@ function Register(): ReactElement {
     >
       <Title />
       <Quill />
+      <Submit />
     </ContentLayout>
   );
 }

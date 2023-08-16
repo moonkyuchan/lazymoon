@@ -100,7 +100,7 @@ function QuillEditor(props) {
         },
       }}
       formats={formats}
-      style={{ height: "100vh" }}
+      style={{}}
     />
   );
 }
