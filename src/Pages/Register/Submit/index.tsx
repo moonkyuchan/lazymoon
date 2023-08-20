@@ -1,14 +1,31 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { InitialDB } from "@root/src/Firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 export default function Submit(): ReactElement {
+  const selector = useSelector((state: any) => state.article);
   const history = useHistory();
+
+  const handleSubmit = async () => {
+    console.log("???");
+    try {
+      const docRef = await addDoc(collection(InitialDB, "article"), {
+        ...selector,
+      }).then(() => history.push("/"));
+      console.log("Document written with ID: ", docRef);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <StyeldWrap>
       <StyledButton onClick={() => history.push("/")}>취소</StyledButton>
-      <StyledButton>등록</StyledButton>
+      <StyledButton onClick={handleSubmit}>등록</StyledButton>
     </StyeldWrap>
   );
 }

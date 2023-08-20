@@ -7,7 +7,7 @@ import { webRoutes } from "@/Router/routes";
 import { selectUid } from "./Store/Slice/Uid";
 
 export default function App() {
-  const uid = useSelector(selectUid);
+  console.log("APP");
 
   return (
     //회원유형별 보여주기 한번 필터링 필요
@@ -17,9 +17,6 @@ export default function App() {
       <ContentLayout>
         <Switch>
           <Suspense fallback={<div>Loading...</div>}>
-            <Route path="/" exact>
-              <Redirect to="/dashboard" />
-            </Route>
             {webRoutes.map((route: any) => {
               return (
                 <Route

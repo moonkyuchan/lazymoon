@@ -40,7 +40,7 @@ const mobileRoutes: RoutePropstest[] = [
 const webRoutes = [
   {
     key: 1,
-    path: "/dashboard",
+    path: "/",
     name: "dashboard",
     component: lazy(() => import("@root/src/Components/Dashboard")),
   },

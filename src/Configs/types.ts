@@ -26,6 +26,19 @@ export interface UserType {
   phone?: number;
 }
 
+type CommentType = {
+  id: number;
+  comment: string[];
+};
+
+export interface ArticleType {
+  title: string;
+  tag: string[];
+  article: string;
+  comment?: CommentType | null;
+  like?: number;
+}
+
 //코딩알려주는 누나 타입 지정 예시
 // export type Restaurant={
 //   name:string,

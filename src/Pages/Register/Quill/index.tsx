@@ -1,16 +1,24 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module-react";
 import "react-quill/dist/quill.snow.css";
+import { useDispatch } from "react-redux";
+
+import { setArticle } from "@root/src/Store/Slice/Article";
 
 import { InitialStorageRef } from "@root/src/Firebase";
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 Quill.register("modules/imageResize", ImageResize);
 
-function QuillEditor(props) {
+function QuillEditor() {
+  const dispatch = useDispatch();
   const quillRef = useRef<any>(null);
   const [contents, setContents] = useState("");
+
+  useEffect(() => {
+    dispatch(setArticle(contents));
+  }, [contents]);
 
   const toolbarOptions = useMemo(
     () => [

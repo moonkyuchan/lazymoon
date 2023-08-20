@@ -1,23 +1,43 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useRef } from "react";
 import styled from "styled-components";
+import { PlusCircleOutlined } from "@ant-design/icons";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import { values } from "@root/src/Configs";
+import { setTitle, setTag } from "@root/src/Store/Slice/Article";
 
 function EditorTitle(): ReactElement {
-  const [tag, setTag] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const tag = useSelector((state: any) => state.article.tag);
+  const [imgUrl, setImgUrl] = useState("");
 
   //이건 유용하게 쓰이겠다 filter로 가능했네
   const handleTag = (value: string) => {
     if (tag.includes(value)) {
-      setTag((prev) => prev.filter((data) => data !== value));
+      dispatch(setTag(tag.filter((data) => data !== value)));
     } else {
-      setTag((prev) => [...prev, value]);
+      dispatch(setTag([...tag, value]));
     }
+  };
+
+  const handleTitle = (e) => {
+    const {
+      target: { value },
+    } = e;
+    dispatch(setTitle(value));
+  };
+
+  const handleImg = (e) => {
+    const {
+      target: { files },
+    } = e;
+    setImgUrl(files[0]);
   };
 
   return (
     <StyledWrap>
-      <StyledInput placeholder="제목을 입력해주세요" />
+      <StyledInput placeholder="제목을 입력해주세요" onChange={handleTitle} />
       <StyledTagWrap>
         {values.category
           .filter((data) => data.tag !== "all")
@@ -32,13 +52,30 @@ function EditorTitle(): ReactElement {
             </StyledTag>
           ))}
       </StyledTagWrap>
+      <StyledLabel>
+        {imgUrl ? (
+          <img src={imgUrl} />
+        ) : (
+          <>
+            <PlusCircleOutlined
+              style={{ fontSize: "50px", marginLeft: "10px" }}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleImg}
+            />
+          </>
+        )}
+      </StyledLabel>
     </StyledWrap>
   );
 }
 
 const StyledWrap = styled.div(({}) => {
   return {
-    height: "110px",
+    height: "400px",
     padding: "20px 0",
     display: "flex",
     flexDirection: "column",
@@ -78,5 +115,20 @@ const StyledTag = styled.button<{ isSelected: boolean }>(
     };
   }
 );
+
+const StyledLabel = styled.label(() => {
+  return {
+    border: "2px dotted black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "200px",
+    height: "200px",
+    cursor: "pointer",
+    [":hover"]: {
+      opacity: 0.5,
+    },
+  };
+});
 
 export default EditorTitle;
