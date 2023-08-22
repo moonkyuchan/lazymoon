@@ -124,7 +124,7 @@ const StyledTitle = styled.div(({ theme }) => {
 
 const StyledForm = styled.form<{ $mobile: boolean }>(({ theme, $mobile }) => {
   return {
-    maxWidth: $mobile ? "330px" : "500px",
+    maxWidth: $mobile ? "300px" : "500px",
     margin: "0 auto",
     display: "flex",
     flexDirection: "column",
@@ -135,7 +135,7 @@ const StyledForm = styled.form<{ $mobile: boolean }>(({ theme, $mobile }) => {
 
 const StyledInput = styled.input(({ theme }) => {
   return {
-    width: "100%",
+    width: "460px",
     height: "50px",
     margin: "15px 0",
     padding: "0 20px",

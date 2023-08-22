@@ -35,7 +35,7 @@ const StyledLayout = styled.main<{
   return excepted
     ? { ...newStyle }
     : {
-        width: "100vw",
+        // width: "100vw",
         height: "auto",
         maxWidth: "1300px",
         padding: "50px 70px",

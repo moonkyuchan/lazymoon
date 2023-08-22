@@ -12,8 +12,8 @@ interface OwnProps {
 function Card(props): ReactElement<OwnProps> {
   const { data, style } = props;
   return (
-    <StyledArticle style={{ ...style }}>
-      <StyledImg src={data.img} />
+    <StyledArticle style={{ ...style }} key={data.id}>
+      <StyledImg src={data.subImg} />
       <StyledTitle>{data.title}</StyledTitle>
       <StyledSubTitle>
         <StyledDate>{data.date}</StyledDate>

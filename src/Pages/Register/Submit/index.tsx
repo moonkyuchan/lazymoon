@@ -1,19 +1,21 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import moment from "moment";
 
 import { InitialDB } from "@root/src/Firebase";
 import { addDoc, collection } from "firebase/firestore";
 
 export default function Submit(): ReactElement {
+  const nowDate = Number(moment().format("YYYYDDMMhhmmss"));
   const selector = useSelector((state: any) => state.article);
   const history = useHistory();
 
   const handleSubmit = async () => {
-    console.log("???");
     try {
       const docRef = await addDoc(collection(InitialDB, "article"), {
+        date: nowDate,
         ...selector,
       }).then(() => history.push("/"));
       console.log("Document written with ID: ", docRef);

@@ -1,5 +1,4 @@
 import moment from "moment";
-
 export type SlideCardType = {
   key: number;
   img: string;
@@ -10,8 +9,8 @@ export type SlideCardType = {
 }[];
 
 export type CardType = {
-  key: number;
-  img: string;
+  id: string;
+  subImg: string;
   title: string;
   comment: number;
   tag: string[];
@@ -32,11 +31,14 @@ type CommentType = {
 };
 
 export interface ArticleType {
+  id?: string;
   title: string;
   tag: string[];
+  subImg: string;
   article: string;
   comment?: CommentType | null;
   like?: number;
+  date?: number;
 }
 
 //코딩알려주는 누나 타입 지정 예시

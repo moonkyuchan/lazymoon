@@ -1,16 +1,20 @@
 import { ReactElement, useState, useRef } from "react";
 import styled from "styled-components";
-import { PlusCircleOutlined } from "@ant-design/icons";
-
+import { PlusCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+
+import { InitialStorageRef } from "@root/src/Firebase";
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 import { values } from "@root/src/Configs";
-import { setTitle, setTag } from "@root/src/Store/Slice/Article";
+import { setTitle, setTag, setSubImg } from "@root/src/Store/Slice/Article";
 
 function EditorTitle(): ReactElement {
   const dispatch = useDispatch();
   const tag = useSelector((state: any) => state.article.tag);
   const [imgUrl, setImgUrl] = useState("");
+  const imgRef = useRef(null);
 
   //이건 유용하게 쓰이겠다 filter로 가능했네
   const handleTag = (value: string) => {
@@ -28,11 +32,25 @@ function EditorTitle(): ReactElement {
     dispatch(setTitle(value));
   };
 
-  const handleImg = (e) => {
+  const handleSubImg = async (e) => {
     const {
       target: { files },
     } = e;
-    setImgUrl(files[0]);
+    if (files) {
+      try {
+        const imgStorageRef = ref(
+          InitialStorageRef,
+          `images/sub/${moment().format("YYYY DD MM hh:mm:ss")}`
+        );
+        await uploadBytes(imgStorageRef, files[0])
+          .then(() => getDownloadURL(imgStorageRef))
+          .then((res) => {
+            setImgUrl(res), dispatch(setSubImg(res));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -52,23 +70,28 @@ function EditorTitle(): ReactElement {
             </StyledTag>
           ))}
       </StyledTagWrap>
-      <StyledLabel>
-        {imgUrl ? (
-          <img src={imgUrl} />
-        ) : (
-          <>
+      {imgUrl ? (
+        <StyledSubImgWrap>
+          <StyledSubImgButton onClick={() => setImgUrl("")} />
+          <img src={imgUrl} alt="Uploaded" />
+        </StyledSubImgWrap>
+      ) : (
+        <StyledLabel imgUrl={imgUrl}>
+          <span>
+            대표이미지
             <PlusCircleOutlined
-              style={{ fontSize: "50px", marginLeft: "10px" }}
+              style={{ fontSize: "14px", marginLeft: "10px" }}
             />
-            <input
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              onChange={handleImg}
-            />
-          </>
-        )}
-      </StyledLabel>
+          </span>
+          <input
+            ref={imgRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleSubImg}
+          />
+        </StyledLabel>
+      )}
     </StyledWrap>
   );
 }
@@ -116,14 +139,39 @@ const StyledTag = styled.button<{ isSelected: boolean }>(
   }
 );
 
-const StyledLabel = styled.label(() => {
+const StyledLabel = styled.label<{ imgUrl: string }>(({ imgUrl }) => {
   return {
-    border: "2px dotted black",
+    border: imgUrl ? "2px solid black" : "2px dotted black",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     width: "200px",
     height: "200px",
+    cursor: "pointer",
+    [":hover"]: {
+      opacity: imgUrl ? 1 : 0.5,
+    },
+  };
+});
+
+const StyledSubImgWrap = styled.div(({}) => {
+  return {
+    width: "200px",
+    height: "200px",
+    position: "relative",
+    ["> img"]: {
+      width: "inherit",
+      height: "inherit",
+    },
+  };
+});
+
+const StyledSubImgButton = styled(CloseCircleOutlined)(({ theme }) => {
+  return {
+    position: "absolute",
+    fontSize: "30px",
+    right: "15px",
+    top: "15px",
     cursor: "pointer",
     [":hover"]: {
       opacity: 0.5,

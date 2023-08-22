@@ -1,6 +1,7 @@
 import { ReactElement, useState, useMemo } from "react";
 import styeld from "styled-components";
 
+import moment from "moment";
 import { CardType } from "@root/src/Configs/types";
 import { Card } from "@root/src/Components/Common";
 
@@ -18,7 +19,13 @@ function GridFilter(props): ReactElement<OwnProps> {
       return data;
     }
     return data.filter((data) => data.tag.includes(currentTab));
-  }, [currentTab]);
+  }, [currentTab, data]);
+
+  console.log(
+    filteredData.sort(({ date }) => {
+      console.log(Number(moment().format("YYYYDDMMhhmmss")));
+    })
+  );
 
   const handleTab = (e) => {
     const {
@@ -45,7 +52,7 @@ function GridFilter(props): ReactElement<OwnProps> {
       </StyledFilterWrap>
       <StyledGrid>
         {filteredData.map((data) => {
-          return <Card data={data} key={data.key} />;
+          return <Card data={data} key={data.id} />;
         })}
       </StyledGrid>
     </>
