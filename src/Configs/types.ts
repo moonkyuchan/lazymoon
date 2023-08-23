@@ -38,7 +38,8 @@ export interface ArticleType {
   article: string;
   comment?: CommentType | null;
   like?: number;
-  date?: number;
+  date?: string;
+  uploadDate?: number;
 }
 
 //코딩알려주는 누나 타입 지정 예시

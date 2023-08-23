@@ -8,17 +8,20 @@ import { InitialDB } from "@root/src/Firebase";
 import { addDoc, collection } from "firebase/firestore";
 
 export default function Submit(): ReactElement {
-  const nowDate = Number(moment().format("YYYYDDMMhhmmss"));
+  const uploadDate = Number(moment().format("YYYYMMDDhhmmss"));
+  const date = moment().format("YYYY-MM-DD");
   const selector = useSelector((state: any) => state.article);
   const history = useHistory();
 
+  //date(string), uploadDate(number)는 sumbit버튼 누를때 생성, 전역상태에서 제외
+  //추후에 sumbit 전에 validation 필요
   const handleSubmit = async () => {
     try {
-      const docRef = await addDoc(collection(InitialDB, "article"), {
-        date: nowDate,
+      await addDoc(collection(InitialDB, "article"), {
+        date,
+        uploadDate,
         ...selector,
       }).then(() => history.push("/"));
-      console.log("Document written with ID: ", docRef);
     } catch (error) {
       console.log(error);
     }

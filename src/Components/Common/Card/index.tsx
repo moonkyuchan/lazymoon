@@ -8,7 +8,7 @@ interface OwnProps {
   data: CardType;
   style?: CSSProperties;
 }
-//props으로 받을건 title/img/date/comment/style
+
 function Card(props): ReactElement<OwnProps> {
   const { data, style } = props;
   return (
@@ -42,32 +42,38 @@ const StyledImg = styled.img(() => {
   return {
     width: "350px",
     height: "350px",
-    borderRadius: "2px",
+    borderRadius: "5px",
   };
 });
 
 const StyledTitle = styled.div(({ theme }) => {
   return {
-    height: "50px",
-    fontSize: theme.fontSizeLg,
-    fontFamily: theme.fontFamilySb,
+    color: theme.grey2,
+    height: "40px",
+    fontSize: "17px",
+    fontFamily: theme.fontFamilyEd,
+    fontWeight: 300,
     margin: "5px 0",
     padding: "0 3px",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    lineHeight: 1.6,
+    lineHeight: 1.1,
     display: "-webkit-box",
     WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
+    textAlign: "center",
   };
 });
 
-const StyledSubTitle = styled.div(({}) => {
+const StyledSubTitle = styled.div(({ theme }) => {
   return {
+    color: theme.grey2,
+    fontSize: theme.fontSizeSm,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     margin: "5px 0",
+    padding: "0 5px",
   };
 });
 

@@ -14,18 +14,16 @@ function GridFilter(props): ReactElement<OwnProps> {
   const { data, filter } = props;
   const [currentTab, setCurrentTab] = useState(props.filter[0].tag);
 
+  const sortedData = useMemo(() => {
+    return data.sort((a, b) => (a.uploadDate > b.uploadDate ? -1 : 1));
+  }, [data]);
+
   const filteredData = useMemo(() => {
     if (currentTab === "all") {
-      return data;
+      return sortedData;
     }
-    return data.filter((data) => data.tag.includes(currentTab));
+    return sortedData.filter((data) => data.tag.includes(currentTab));
   }, [currentTab, data]);
-
-  console.log(
-    filteredData.sort(({ date }) => {
-      console.log(Number(moment().format("YYYYDDMMhhmmss")));
-    })
-  );
 
   const handleTab = (e) => {
     const {

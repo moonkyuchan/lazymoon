@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment";
 
 import { FrontType } from "@root/src/Configs";
 
@@ -10,7 +9,6 @@ const initialState: FrontType.ArticleType = {
   article: "",
   comment: null,
   like: 0,
-  date: 0,
 };
 
 const articleSlice = createSlice({
@@ -47,20 +45,10 @@ const articleSlice = createSlice({
     setLike: (state, action: PayloadAction<FrontType.ArticleType["like"]>) => {
       state.like = action.payload;
     },
-    setDate: (state, action: PayloadAction<FrontType.ArticleType["date"]>) => {
-      state.date = action.payload;
-    },
   },
 });
 
-export const {
-  setTitle,
-  setTag,
-  setSubImg,
-  setArticle,
-  setComment,
-  setLike,
-  setDate,
-} = articleSlice.actions;
+export const { setTitle, setTag, setSubImg, setArticle, setComment, setLike } =
+  articleSlice.actions;
 
 export default articleSlice.reducer;
