@@ -1,7 +1,6 @@
 import { ReactElement, useState, useMemo } from "react";
 import styeld from "styled-components";
 
-import moment from "moment";
 import { CardType } from "@root/src/Configs/types";
 import { Card } from "@root/src/Components/Common";
 
@@ -70,7 +69,6 @@ const StyledGrid = styeld.section(({}) => {
 const StyledFilterWrap = styeld.div(() => {
   return {
     margin: "50px 0",
-    padding: "0 20px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -85,6 +83,7 @@ const StyledFilterElement = styeld.button<{ value: string; title: string }>(
       background: "none",
       fontFamily:
         value === title ? `${theme.fontFamilySb}` : `${theme.fontFamilyEd}`,
+      // fontFamily: theme.fontFamilyEd,
       fontSize: value === title ? `${theme.fontSizeXl}` : `${theme.fontSizeLg}`,
       color: value === title ? `${theme.black}` : `${theme.grey2}`,
       cursor: "pointer",

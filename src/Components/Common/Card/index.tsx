@@ -1,6 +1,7 @@
 import { CSSProperties, ReactElement } from "react";
 import styled from "styled-components";
 import { CommentOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
 
 import { CardType } from "@root/src/Configs/types";
 
@@ -11,8 +12,14 @@ interface OwnProps {
 
 function Card(props): ReactElement<OwnProps> {
   const { data, style } = props;
+  const history = useHistory();
+
+  const handleRouter = () => {
+    history.push(`/viewer/${data.id}`);
+  };
+
   return (
-    <StyledArticle style={{ ...style }} key={data.id}>
+    <StyledArticle style={{ ...style }} key={data.id} onClick={handleRouter}>
       <StyledImg src={data.subImg} />
       <StyledTitle>{data.title}</StyledTitle>
       <StyledSubTitle>

@@ -44,7 +44,7 @@ ${reset}
   font-family: 'Edensor';
   src: url(${require("@/Asset/Font/Edensor-FREE.otf")}) format('opentype');
   font-style: normal;
-
+}
 
 
 
@@ -55,6 +55,7 @@ ${reset}
 
 body{
   font-family:"Regular";
+  position: "relative";
 }
 
 `;

@@ -38,7 +38,7 @@ const StyledLayout = styled.main<{
         // width: "100vw",
         height: "auto",
         maxWidth: "1300px",
-        padding: "50px 70px",
         margin: "0 auto",
+        position: "relative",
       };
 });

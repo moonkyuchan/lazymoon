@@ -46,10 +46,9 @@ const StyledHeader = styled.header(() => {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "0 70px",
+    padding: "70px 70px 0 70px",
     margin: "0 auto",
-    marginTop: "50px",
-    height: "80px",
+    height: "150px",
   };
 });
 
@@ -57,7 +56,7 @@ const StyledTitle = styled.span(({ theme }) => {
   return {
     cursor: "pointer",
     fontSize: "40px",
-    fontFamily: theme.fontFamilyT,
+    fontFamily: theme.fontFamilyEd,
     fontWeight: 600,
     [":hover"]: {
       color: theme.grey2,
@@ -67,7 +66,6 @@ const StyledTitle = styled.span(({ theme }) => {
 
 const StyledIconWrap = styled.div(() => {
   return {
-    height: "inherit",
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
