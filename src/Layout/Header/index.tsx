@@ -2,10 +2,13 @@ import { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { SearchOutlined, UserOutlined, BellOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
+import { DropDown } from "@root/src/Components/Common";
 
 export default function WebHeader(): ReactElement {
   const history = useHistory();
   const [showsearch, setShowSearch] = useState<Boolean>(false);
+  const [showAlarm, setShowAlarm] = useState<Boolean>(false);
+
   const [keyword, setKeyword] = useState<string>("");
 
   const handelKeyword = (e) => {
@@ -18,6 +21,10 @@ export default function WebHeader(): ReactElement {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("SUBMIT", keyword);
+  };
+
+  const handleAlarm = () => {
+    setShowAlarm((prev) => !prev);
   };
 
   return (
@@ -33,7 +40,15 @@ export default function WebHeader(): ReactElement {
           />
         </form>
         <StyledSearch onClick={() => setShowSearch((state) => !state)} />
-        <StyledAlarm onClick={() => console.log("ALARM!")} />
+        <div style={{ position: "relative" }}>
+          <StyledAlarm onClick={handleAlarm} />
+          {showAlarm && (
+            <DropDown
+              show={showAlarm}
+              style={{ width: "300px", height: "500px" }}
+            />
+          )}
+        </div>
         <StyledLogin onClick={() => history.push("/login")} />
       </StyledIconWrap>
     </StyledHeader>
@@ -101,5 +116,10 @@ const sharedIconStyles = ({ theme }) => ({
 });
 
 const StyledLogin = styled(UserOutlined)(sharedIconStyles);
-const StyledAlarm = styled(BellOutlined)(sharedIconStyles);
+const StyledAlarm = styled(BellOutlined)((theme) => {
+  return {
+    ...sharedIconStyles(theme),
+  };
+});
+
 const StyledSearch = styled(SearchOutlined)(sharedIconStyles);

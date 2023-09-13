@@ -14,8 +14,6 @@ export default function Dashboard(): ReactElement {
   const [articles, setArticles] = useState<FrontType.CardType[]>([]);
   const articleRef = collection(InitialDB, "article");
 
-  const history = useHistory();
-
   useEffect(() => {
     async function getData() {
       try {
