@@ -46,16 +46,15 @@ function Login(): ReactElement {
   async function handleGoogleLogin() {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(InitialAuth, provider)
-        .then(async (result) => {
-          const token = await result.user.getIdToken();
-          if (token) {
-            localStorage.setItem("token", token);
-          }
-        })
-        .then(() => history.push("/"));
+      await signInWithPopup(InitialAuth, provider).then(async (result) => {
+        const token = await result.user.getIdToken();
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+      });
+      // .then(() => history.push("/"));
     } catch (error) {
-      console.log(error);
+      console.log("ERROR", error);
     }
   }
 
@@ -135,7 +134,7 @@ const StyledForm = styled.form<{ $mobile: boolean }>(({ theme, $mobile }) => {
 
 const StyledInput = styled.input(({ theme }) => {
   return {
-    width: "460px",
+    width: "100%",
     height: "50px",
     margin: "15px 0",
     padding: "0 20px",
@@ -160,10 +159,10 @@ const SharedButtonStyle = styled.button(({ theme }) => {
     border: `none`,
     borderRadius: "5px",
     cursor: "pointer",
-    background: theme.grey1,
+    background: theme.grey2,
     height: "45px",
     [":hover"]: {
-      background: theme.grey3,
+      background: theme.grey4,
       color: theme.grey1,
     },
   };

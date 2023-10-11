@@ -1,7 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import { Slider, GridFilter } from "@/Components/Common";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
 
 import { InitialDB } from "@root/src/Firebase";
 import { collection, getDocs } from "firebase/firestore";
