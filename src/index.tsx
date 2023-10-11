@@ -19,7 +19,6 @@ if (!rootElement) throw new Error("Failed to find the root element");
 const root = ReactDOM.createRoot(rootElement);
 
 function SwitchApp(): ReactElement {
-  console.log("INDEX");
   const { device } = useContext(DeviceContext);
   const { isMobile } = device;
   return (

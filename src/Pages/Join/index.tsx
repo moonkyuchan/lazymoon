@@ -2,8 +2,6 @@ import { ReactElement, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { InitialAuth } from "@root/src/Firebase";
 import DeviceContext from "@/Context/DeviceContext";
 
 import { ContentLayout } from "@root/src/Layout";
@@ -22,50 +20,33 @@ function Join(): ReactElement {
     password: "",
     repassword: "",
     name: "",
-    phone: 0,
   });
 
-  //validation은 MVP 이후에 진행하자
   const handleLogin = (e) => {
     const {
       target: { value, name },
     } = e;
-    switch (name) {
-      // case "password":
-      //   if (name === "password" && value === userData.repassword) {
-      //     setUserData((prev) => ({
-      //       ...prev,
-      //       [name]: value,
-      //     }));
-      //     setCheck(true);
-      //   } else {
-      //     setCheck(false);
-      //   }
-      //   break;
-
-      default:
-        setUserData((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
-    }
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
-  //굳이 여기서 비동기 처리를 할 필요가 있나?
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(
-        InitialAuth,
-        userData.email,
-        userData.password
-      ).then((userCredential) => {
-        if (userCredential) {
-          history.push("/login");
-        }
-      });
-    } catch (error) {
-      console.log("ERROR M :", error);
-    }
+    // try {
+    //   await createUserWithEmailAndPassword(
+    //     InitialAuth,
+    //     userData.email,
+    //     userData.password
+    //   ).then((userCredential) => {
+    //     if (userCredential) {
+    //       history.push("/login");
+    //     }
+    //   });
+    // } catch (error) {
+    //   console.log("ERROR M :", error);
+    // }
   };
 
   return (
@@ -86,7 +67,7 @@ function Join(): ReactElement {
                 placeholder={input.placeholder}
                 type={input.type}
                 name={input.name}
-                onChange={handleLogin}
+                onChange={(e) => handleLogin(e)}
               />
             </StyledInputWrap>
           );

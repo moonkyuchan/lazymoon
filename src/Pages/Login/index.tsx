@@ -2,75 +2,46 @@ import { ReactElement, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { InitialAuth } from "@/Firebase";
-
 import DeviceContext from "@/Context/DeviceContext";
 
 import { ContentLayout } from "@root/src/Layout";
+
+import SocialLogin from "./SocialLogin";
+import { values } from "./Config";
 
 function Login(): ReactElement {
   const { device } = useContext(DeviceContext);
   const { isMobile } = device;
   const history = useHistory();
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
-  const ButtonArr: {
-    key: number;
-    title: string;
-    login?: () => Promise<void>;
-  }[] = [
-    {
-      key: 1,
-      title: "GOOGLE Login",
-      login: handleGoogleLogin,
-    },
-    {
-      key: 2,
-      title: "NAVER Login",
-      // login: handleGoogleLogin(e),
-    },
-    {
-      key: 3,
-      title: "KAKAO Login",
-      // login: handleGoogleLogin(e),
-    },
-  ];
-
-  async function handleGoogleLogin() {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(InitialAuth, provider).then(async (result) => {
-        const token = await result.user.getIdToken();
-        if (token) {
-          localStorage.setItem("token", token);
-        }
-      });
-      // .then(() => history.push("/"));
-    } catch (error) {
-      console.log("ERROR", error);
-    }
-  }
+  const [inputValue, setInputValue] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(InitialAuth, email, password).then(
-        (user) => {
-          if (user) {
-            history.push("/");
-          }
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    // e.preventDefault();
+    // try {
+    //   await signInWithEmailAndPassword(InitialAuth, email, password).then(
+    //     (user) => {
+    //       if (user) {
+    //         history.push("/");
+    //       }
+    //     }
+    //   );
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const handleInput = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    setInputValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
@@ -82,28 +53,25 @@ function Login(): ReactElement {
     >
       <StyledForm $mobile={isMobile} onSubmit={handleSubmit}>
         <StyledTitle>LAZYMOON</StyledTitle>
-        <StyledInput
-          placeholder="Email"
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <StyledInput
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {ButtonArr.map((data) => {
+        {values.inputArr.map((ele) => {
           return (
-            <StyledWideButton key={data.key} onClick={data.login}>
-              {data.title}
-            </StyledWideButton>
+            <StyledInput
+              key={ele.key}
+              type={ele.type}
+              placeholder={ele.placeholder}
+              name={ele.name}
+              onChange={(e) => handleInput(e)}
+            />
           );
         })}
+        <SocialLogin />
         <StyledButtonWrap>
-          <StyledButton onClick={() => history.push("/")}>Cancel</StyledButton>
-          <StyledButton type="submit">Login</StyledButton>
+          <StyledButton onClick={() => history.push("/")} $mobile={isMobile}>
+            Cancel
+          </StyledButton>
+          <StyledButton type="submit" $mobile={isMobile}>
+            Login
+          </StyledButton>
         </StyledButtonWrap>
         <StyledWideButton onClick={() => history.push("/join")}>
           Join
@@ -117,7 +85,7 @@ const StyledTitle = styled.div(({ theme }) => {
   return {
     fontFamily: theme.fontFamilySb,
     fontSize: theme.fontSizeXxl,
-    margin: "100px 0 40px 0",
+    margin: "0 0 40px 0",
   };
 });
 
@@ -129,6 +97,8 @@ const StyledForm = styled.form<{ $mobile: boolean }>(({ theme, $mobile }) => {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    position: "relative",
+    top: "150px",
   };
 });
 
@@ -168,13 +138,15 @@ const SharedButtonStyle = styled.button(({ theme }) => {
   };
 });
 
-const StyledButton = styled(SharedButtonStyle)(({ theme }) => {
-  return {
-    width: "155px",
-  };
-});
+const StyledButton = styled(SharedButtonStyle)<{ $mobile: boolean }>(
+  ({ $mobile }) => {
+    return {
+      width: $mobile ? "120px" : "155px",
+    };
+  }
+);
 
-const StyledWideButton = styled(SharedButtonStyle)(() => {
+export const StyledWideButton = styled(SharedButtonStyle)(() => {
   return { marginTop: "15px", width: "100%" };
 });
 
