@@ -1,8 +1,8 @@
 $font-size-xxs: 11px; // custom
 $font-size-xs: 12px; // custom
 $font-size-sm: 13px;
-$font-size-base: 14px;
-$font-size-lg: 15px;
+$font-size-base: 15px;
+$font-size-lg: 17px;
 $font-size-xl: 20px; // custom
 $font-size-xxl: 30px;
 
@@ -16,7 +16,19 @@ $font-family-Ed: "Edensor";
 
 $white: #ffffff;
 $black: #000000;
-$grey1: #f6f6f6;
+$black2: #161617;
+$grey1: #f5f5f7;
 $grey2: #dddddd;
 $grey3: #565656;
 $grey4: #242424;
+
+@function flex($direction: row, $justify: center, $align: center) {
+  @return (
+    display: flex,
+    flex-direction: $direction,
+    justify-content: $justify,
+    align-items: $align
+  );
+}
+
+$flex: flex(row, space-between, center);

@@ -18,8 +18,9 @@ function Join(): ReactElement {
   const [userData, setUserData] = useState<UserType>({
     email: "",
     password: "",
-    repassword: "",
     name: "",
+    lastname: "",
+    image: null,
   });
 
   const handleLogin = (e) => {

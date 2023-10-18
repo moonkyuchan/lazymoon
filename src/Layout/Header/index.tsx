@@ -1,125 +1,59 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import styled from "styled-components";
-import { SearchOutlined, UserOutlined, BellOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
-import { DropDown } from "@root/src/Components/Common";
 
-export default function WebHeader(): ReactElement {
-  const history = useHistory();
-  const [showsearch, setShowSearch] = useState<Boolean>(false);
-  const [showAlarm, setShowAlarm] = useState<Boolean>(false);
+import { values } from "./Config";
 
-  const [keyword, setKeyword] = useState<string>("");
-
-  const handelKeyword = (e) => {
-    const {
-      target: { value },
-    } = e;
-    setKeyword(value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("SUBMIT", keyword);
-  };
-
-  const handleAlarm = () => {
-    setShowAlarm((prev) => !prev);
-  };
-
+function Header(): ReactElement {
   return (
-    <StyledHeader>
-      <StyledTitle onClick={() => history.push("/")}>LAZYMOON</StyledTitle>
-      <StyledIconWrap>
-        <form onSubmit={handleSubmit}>
-          <StyledInput
-            show={showsearch}
-            placeholder="검색어를 입력해주세요"
-            onChange={handelKeyword}
-            value={keyword}
-          />
-        </form>
-        <StyledSearch onClick={() => setShowSearch((state) => !state)} />
-        <div style={{ position: "relative" }}>
-          <StyledAlarm onClick={handleAlarm} />
-          {showAlarm && (
-            <DropDown
-              show={showAlarm}
-              style={{ width: "300px", height: "500px" }}
-            />
-          )}
+    <StyledNav>
+      <StyledMenu>
+        {values.NavMenu.map((data) => {
+          return (
+            <StyledMenuItem
+              style={{ display: "flex", gap: "10px" }}
+              key={data.key}
+            >
+              {data.title}
+            </StyledMenuItem>
+          );
+        })}
+        <div>
+          <span>하하</span>
+          <span>하하</span>
+          <span>하하</span>
         </div>
-        <StyledLogin onClick={() => history.push("/login")} />
-      </StyledIconWrap>
-    </StyledHeader>
+      </StyledMenu>
+    </StyledNav>
   );
 }
 
-const StyledHeader = styled.header(() => {
+const StyledNav = styled.nav(({ theme }) => {
   return {
-    maxWidth: "1300px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "70px 70px 0 70px",
-    margin: "0 auto",
-    height: "150px",
+    height: "45px",
+    background: theme.grey1,
+    fontFamily: theme.fontFamilyEl,
   };
 });
 
-const StyledTitle = styled.span(({ theme }) => {
+const StyledMenu = styled.div(({ theme }) => {
+  return {
+    padding: "0 20px",
+    height: "inherit",
+    margin: "0 auto",
+    maxWidth: "1024px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    ["> span:first-child"]: {
+      fontFamily: theme.fontFamilyB,
+    },
+  };
+});
+
+const StyledMenuItem = styled.span(() => {
   return {
     cursor: "pointer",
-    fontSize: "40px",
-    fontFamily: theme.fontFamilyEd,
-    fontWeight: 600,
-    [":hover"]: {
-      color: theme.grey2,
-    },
   };
 });
 
-const StyledIconWrap = styled.div(() => {
-  return {
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  };
-});
-
-const StyledInput = styled.input<{ show: Boolean }>(({ show, theme }) => {
-  return {
-    height: "30px",
-    transition: "width 0.8s, opacity 0.8s",
-    width: show ? "200px" : "0",
-    visibility: "visible",
-    opacity: show ? 1 : 0,
-    marginRight: "10px",
-    padding: "0 10px",
-    fontSize: theme.fontSizeXs,
-    border: `1.5px solid ${theme.grey2}`,
-    borderRadius: "5px",
-    ["&:focus, &:active"]: {
-      outline: "none",
-    },
-  };
-});
-
-const sharedIconStyles = ({ theme }) => ({
-  fontSize: "24px",
-  padding: "0 4px 3px 4px",
-  margin: "0 5px",
-  [":hover"]: {
-    color: theme.grey2,
-    borderBottom: `1px solid ${theme.grey2}`,
-  },
-});
-
-const StyledLogin = styled(UserOutlined)(sharedIconStyles);
-const StyledAlarm = styled(BellOutlined)((theme) => {
-  return {
-    ...sharedIconStyles(theme),
-  };
-});
-
-const StyledSearch = styled(SearchOutlined)(sharedIconStyles);
+export default Header;

@@ -1,24 +1,19 @@
-import { DefaultTheme } from "styled-components";
+import { css } from "styled-components";
 
-export type ColorsTypes = typeof colors;
-export type FontSizeTypes = typeof fontSizes;
+const variables = {
+  flex: (direction = "row", justify = "center", align = "center") => `
+    display: flex;
+    flex-direction: ${direction};
+    justify-content: ${justify};
+    align-items: ${align};
+  `,
 
-const colors = {
-  black: "#000",
-  white: "fff",
+  absoluteCenter: css`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `,
 };
 
-const fontSizes = {
-  xs: "11px",
-  sm: "12px",
-  base: "14px",
-  lg: "15px",
-  xl: "16px",
-};
-
-const theme: DefaultTheme = {
-  colors,
-  fontSizes,
-};
-
-export default theme;
+export default variables;

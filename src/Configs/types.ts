@@ -20,9 +20,10 @@ export type CardType = {
 export interface UserType {
   email: string;
   password: string;
-  repassword: string;
   name: string;
   phone?: number;
+  lastname?: "";
+  image?: null;
 }
 
 type CommentType = {

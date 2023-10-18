@@ -26,7 +26,7 @@ const inputArr: InputTypes[] = [
     type: "password",
     placeholder: "비밀번호를 다시 입력해주세요.",
     title: "Confirm Password",
-    name: "repassword",
+    name: "lastname",
   },
   {
     key: 4,

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { Header, ContentLayout, Footer } from "@/Layout";
+import { ExeHeader, ContentLayout, Footer, Header } from "@/Layout";
 import { webRoutes } from "@/Router/routes";
 import { Spinner } from "./Components/Common";
 import { Portal } from "@/Components/";
@@ -13,6 +13,7 @@ export default function App() {
     //Slider values는 좋아요 sort 순으로 상위 10개만
     <>
       <Header />
+      <ExeHeader />
       <ContentLayout>
         <Switch>
           <Suspense
