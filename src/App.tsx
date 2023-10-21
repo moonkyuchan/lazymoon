@@ -7,13 +7,9 @@ import { Spinner } from "./Components/Common";
 import { Portal } from "@/Components/";
 
 export default function App() {
-  console.log("APP");
   return (
-    //회원유형별 보여주기 한번 필터링 필요
-    //Slider values는 좋아요 sort 순으로 상위 10개만
     <>
       <Header />
-      <ExeHeader />
       <ContentLayout>
         <Switch>
           <Suspense

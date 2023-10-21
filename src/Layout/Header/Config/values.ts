@@ -3,31 +3,31 @@ interface NavMenuTypes {
   title: string;
 }
 
-const NavMenu: NavMenuTypes[] = [
+const navMenu: NavMenuTypes[] = [
   {
     key: 0,
-    title: "Lazy",
+    title: "LAZYMOON",
   },
   {
     key: 1,
-    title: "place",
+    title: "Place",
   },
   {
     key: 2,
-    title: "arts & culture",
+    title: "Arts & Culture",
   },
   {
     key: 3,
-    title: "fasion",
+    title: "Fasion",
   },
   {
     key: 4,
-    title: "films",
+    title: "Films",
   },
   {
     key: 5,
-    title: "music",
+    title: "Music",
   },
 ];
 
-export { NavMenu };
+export { navMenu };
