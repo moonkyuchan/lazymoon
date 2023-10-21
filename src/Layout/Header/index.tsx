@@ -1,39 +1,44 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import styled from "styled-components";
 
+import IconWrap from "./IconWrap";
+import HeaderDetail from "./Detail";
 import { values } from "./Config";
 
 function Header(): ReactElement {
+  const [showDetail, setShowDetail] = useState(false);
   return (
-    <StyledNav>
+    <StyledNav showDetail={showDetail}>
       <StyledMenu>
-        {values.NavMenu.map((data) => {
+        {values.navMenu.map((data) => {
           return (
             <StyledMenuItem
-              style={{ display: "flex", gap: "10px" }}
               key={data.key}
+              onMouseEnter={() => setShowDetail(true)}
+              onMouseLeave={() => setShowDetail(false)}
             >
               {data.title}
             </StyledMenuItem>
           );
         })}
-        <div>
-          <span>하하</span>
-          <span>하하</span>
-          <span>하하</span>
-        </div>
+        <IconWrap />
       </StyledMenu>
+      <HeaderDetail showDetail={showDetail} />
     </StyledNav>
   );
 }
 
-const StyledNav = styled.nav(({ theme }) => {
-  return {
-    height: "45px",
-    background: theme.grey1,
-    fontFamily: theme.fontFamilyEl,
-  };
-});
+const StyledNav = styled.nav<{ showDetail: boolean }>(
+  ({ theme, showDetail }) => {
+    return {
+      position: "relative",
+      height: "45px",
+      background: showDetail ? theme.white : theme.grey1,
+      transition: "background 0.2s",
+      fontFamily: theme.fontFamilyT,
+    };
+  }
+);
 
 const StyledMenu = styled.div(({ theme }) => {
   return {
@@ -45,13 +50,14 @@ const StyledMenu = styled.div(({ theme }) => {
     justifyContent: "space-between",
     alignItems: "center",
     ["> span:first-child"]: {
-      fontFamily: theme.fontFamilyB,
+      fontFamily: theme.fontFamilySb,
     },
   };
 });
 
 const StyledMenuItem = styled.span(() => {
   return {
+    padding: "5px",
     cursor: "pointer",
   };
 });
